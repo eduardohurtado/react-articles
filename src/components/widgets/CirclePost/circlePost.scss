@@ -1,0 +1,19 @@
+.container {
+  background: #94bfbe;
+  // border: 5px solid #0f1c3f;
+  border-radius: 50%;
+  box-shadow: 0 0 0.4em 0.3em rgba(15, 28, 63, 0.125);
+  height: 150px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+
+  .content {
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.25;
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.3);
+  }
+}

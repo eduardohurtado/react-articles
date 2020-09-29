@@ -1,0 +1,12 @@
+.metricsPage {
+  grid-column: 1 / span 3;
+  grid-row: 3 / span 3;
+  overflow: auto;
+  padding: 20px;
+  margin: 0 auto;
+
+  .rowWrap {
+    display: flex;
+    flex-flow: row wrap;
+  }
+}

@@ -1,0 +1,45 @@
+.navBar {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+  background-color: #5c0029;
+  z-index: 10;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+
+      :hover {
+        filter: brightness(0.5);
+      }
+
+      a {
+        display: block;
+        padding: 10px;
+        font-size: 20px;
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .item-r {
+    float: right;
+  }
+}
+
+h1 {
+  color: white;
+  text-shadow: 3px 1px 0.9px rgba(0, 0, 0, 0.3);
+}
+
+.banner {
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 1;
+  background-color: #61304b;
+  display: flex;
+  box-shadow: 0 1px 5px 2px #222;
+}

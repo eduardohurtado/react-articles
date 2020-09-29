@@ -1,0 +1,16 @@
+html {
+  height: 100%;
+
+  body {
+    background-color: #94bfbe;
+  }
+
+  .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: min-content min-content repeat(3, 1fr) min-content;
+    height: 100vh;
+    margin: auto;
+    overflow: hidden;
+  }
+}
