@@ -18,16 +18,24 @@ export default function NavBar() {
       <div className="navBar">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" replace>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/Metrics">Metrics</Link>
+            <Link to="/Metrics" replace>
+              Metrics
+            </Link>
           </li>
           <li>
-            <Link to="/About">About</Link>
+            <Link to="/About" replace>
+              About
+            </Link>
           </li>
           <li className="item-r">
-            <Link to="/Contact">Contact</Link>
+            <Link to="/Contact" replace>
+              Contact
+            </Link>
           </li>
         </ul>
       </div>
