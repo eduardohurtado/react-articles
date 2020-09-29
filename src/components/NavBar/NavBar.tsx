@@ -2,17 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 //Icon
-import { ImHome3 } from "react-icons/im";
+import { SiReact } from "react-icons/si";
 
 //Style
 import "./navBar.scss";
 
-const iconStyle = {
-  margin: "15px",
-  color: "white",
-};
-
 export default function NavBar() {
+  const iconStyle = {
+    margin: "15px",
+    color: "white",
+  };
+
   return (
     <>
       <div className="navBar">
@@ -32,8 +32,8 @@ export default function NavBar() {
         </ul>
       </div>
       <div className="banner">
-        <ImHome3 size={40} style={iconStyle} />
-        <h1>Page title</h1>
+        <SiReact size={40} style={iconStyle} />
+        <h1>React Articles</h1>
       </div>
     </>
   );
