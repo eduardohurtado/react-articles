@@ -1,0 +1,75 @@
+.containerAF {
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+  width: 60vw;
+  height: 50vw;
+  display: flex;
+
+  .formAF {
+    position: relative;
+    width: 95%;
+    height: 90%;
+    border-radius: 10px;
+    margin: auto;
+    background: #726a95;
+    overflow: auto;
+
+    .formAF__header {
+      overflow: auto;
+      width: 100%;
+      height: 40px;
+      background: #eee;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+
+      .itemAF1 {
+        display: block;
+        font-size: 20px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+
+      .itemAF2 {
+        display: block;
+        font-size: 20px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+
+      .itemAF3 {
+        display: block;
+        font-size: 20px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+    }
+
+    .formAFContent {
+      width: 100%;
+      height: min-content;
+      .formAFContent__center {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+      }
+
+      .userInfo {
+        margin: 20px 50px 0 20px;
+
+        input[type="text"] {
+          border: 1px solid #999;
+          border-radius: 5px;
+        }
+
+        p {
+          margin-bottom: 10px;
+          padding: 0;
+          color: #eee;
+        }
+      }
+    }
+  }
+}
