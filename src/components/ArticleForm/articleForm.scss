@@ -1,14 +1,13 @@
 .containerAF {
-  grid-column: 1 / span 1;
-  grid-row: 3 / span 1;
-  width: 60vw;
-  height: 70vh;
+  // width: 450px;
+  // height: 600px;
+  width: 40%;
   display: flex;
+  margin: 20px;
 
   .formAF {
-    position: relative;
-    width: 95%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     margin: auto;
     background: #726a95;
@@ -72,6 +71,12 @@
           color: #eee;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .containerAF {
+      width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
     }
   }
 }

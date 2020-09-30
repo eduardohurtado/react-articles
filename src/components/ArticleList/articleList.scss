@@ -1,0 +1,18 @@
+.articleList {
+  width: 40%;
+  display: flex;
+  margin: 20px;
+
+  .articleListContainer {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    overflow: auto;
+  }
+
+  @media screen and (max-width: 800px) {
+    .articleList {
+      width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+  }
+}

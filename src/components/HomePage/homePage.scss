@@ -1,0 +1,8 @@
+.gridHomePage {
+  grid-column: 1 / span 3;
+  grid-row: 3 / span 3;
+  overflow: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}

@@ -2,11 +2,16 @@ import React from "react";
 
 //Components
 import ArticleForm from "../ArticleForm/ArticleForm";
+import ArticleList from "../ArticleList/ArticleList";
+
+//Style
+import "./homePage.scss";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="gridHomePage">
       <ArticleForm />
+      <ArticleList />
     </div>
   );
 }
