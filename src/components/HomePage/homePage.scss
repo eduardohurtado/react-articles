@@ -9,16 +9,15 @@
   flex-flow: row wrap;
   justify-content: center;
 
-  .container1 {
+  .containerHP {
     width: 45%;
-  height: 570px;
-  margin: 10px;
-  overflow: auto;
+    height: 570px;
+    margin: 30px 10px 0 10px;
+    overflow: auto;
   }
 
-  
   @media screen and (max-width: 800px) {
-    .container1 {
+    .containerHP {
       width: 90%; /* The width is 100%, when the viewport is 800px or smaller */
     }
   }

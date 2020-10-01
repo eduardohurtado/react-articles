@@ -10,13 +10,12 @@ import "./homePage.scss";
 export default function HomePage() {
   return (
     <div className="gridHomePage">
-     
-        <div className="container1">
+      <div className="containerHP">
         <ArticleForm />
-        </div>
-        <div className="container1">
+      </div>
+      <div className="containerHP">
         <ArticleList />
-        </div>
+      </div>
     </div>
   );
 }
