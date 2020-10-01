@@ -1,82 +1,71 @@
-.containerAF {
-  // width: 450px;
-  // height: 600px;
-  width: 40%;
-  display: flex;
-  margin: 20px;
+.formAF {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: #726a95;
+  overflow: auto;
 
-  .formAF {
+  .formAF__header {
     width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    margin: auto;
-    background: #726a95;
-    overflow: auto;
+    height: 40px;
+    background: #eee;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    overflow: hidden;
+    span {
+      font-size: 20px;
 
-    .formAF__header {
-      width: 100%;
-      height: 40px;
-      background: #eee;
-      border-radius: 10px 10px 0 0;
-      display: flex;
-
-      .itemAF1 {
-        display: block;
-        font-size: 20px;
-        width: 100%;
-        margin: auto;
-        text-align: center;
-      }
-
-      .itemAF2 {
-        display: block;
-        font-size: 20px;
-        width: 100%;
-        margin: auto;
-        text-align: center;
-      }
-
-      .itemAF3 {
-        display: block;
-        font-size: 20px;
-        width: 100%;
-        margin: auto;
-        text-align: center;
+      @media screen and (max-width: 800px) {
+        font-size: 17px;
       }
     }
 
-    .formAFContent {
+    .itemAF {
+      display: block;
+      font-size: 20px;
       width: 100%;
-      height: min-content;
-      overflow: auto;
-      .formAFContent__center {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-      }
-
-      .buttonSubmit {
-        width: 100px;
-        height: 50px;
-        margin: 5px;
-      }
-
-      .userInfo {
-        margin: 20px 50px 0 20px;
-        color: #eee;
-
-        p {
-          margin-bottom: 10px;
-          padding: 0;
-          color: #eee;
-        }
+      margin: auto;
+      text-align: center;
+      @media screen and (max-width: 800px) {
+        font-size: 17px;
       }
     }
   }
 
-  @media screen and (max-width: 800px) {
-    .containerAF {
-      width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  .formAFContent {
+    width: 100%;
+    height: min-content;
+    overflow: auto;
+    .formAFContent__center {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+
+    .buttonSubmit {
+      width: 100px;
+      height: 50px;
+      margin: 5px;
+    }
+
+    .userInfo {
+      color: #eee;
+
+      p {
+        margin-bottom: 10px;
+        padding: 0;
+        color: #eee;
+      }
+    }
+
+    .userInfoName {
+      color: #eee;
+      margin: 10px;
+      p {
+        margin-bottom: 10px;
+        padding: 0;
+        color: #eee;
+      }
     }
   }
 }

@@ -1,8 +1,25 @@
 .gridHomePage {
   grid-column: 1 / span 3;
   grid-row: 3 / span 3;
-  overflow: auto;
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  overflow: auto;
+
   flex-flow: row wrap;
   justify-content: center;
+
+  .container1 {
+    width: 45%;
+  height: 570px;
+  margin: 10px;
+  overflow: auto;
+  }
+
+  
+  @media screen and (max-width: 800px) {
+    .container1 {
+      width: 90%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+  }
 }

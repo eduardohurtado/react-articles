@@ -32,11 +32,11 @@ const columns = [
 class MyComponent extends Component {
   render() {
     return (
-      <div className="articleList">
+     
         <div className="articleListContainer">
           <DataTable title="Arnold Movies" columns={columns} data={data} />
         </div>
-      </div>
+    
     );
   }
 }
