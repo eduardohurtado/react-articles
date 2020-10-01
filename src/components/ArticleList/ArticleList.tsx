@@ -41,7 +41,18 @@ class MyComponent extends Component {
   render() {
     return (
       <div className="articleListContainer">
-        <DataTable title="Arnold Movies" columns={columns} data={data} />
+        <DataTable
+          title="Articles / Post"
+          columns={columns}
+          data={data}
+          responsive={true}
+          pagination={true}
+          highlightOnHover={true}
+          striped={true}
+          pointerOnHover={true}
+          progressPending={undefined}
+          onRowClicked={(e)=>{console.log(e);}}
+        />
       </div>
     );
   }

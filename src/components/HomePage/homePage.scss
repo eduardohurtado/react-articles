@@ -1,24 +1,61 @@
 .gridHomePage {
   grid-column: 1 / span 3;
   grid-row: 3 / span 3;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   overflow: auto;
 
-  flex-flow: row wrap;
-  justify-content: center;
-
-  .containerHP {
-    width: 45%;
-    height: 570px;
-    margin: 30px 10px 0 10px;
-    overflow: auto;
+  .plantBanner {
+    width: 100%;
+    height: 20vw;
+    position: absolute;
+    z-index: -10;
+    background-image: url("https://live.staticflickr.com/65535/50405905827_3db4ef871d_o.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: loadblur 0.5s 1;
   }
 
-  @media screen and (max-width: 800px) {
+  .contentHP {
+    width: 100%;
+    margin-top: 20vw;
+    background: #071013;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    flex-flow: row wrap;
+    justify-content: center;
+
     .containerHP {
-      width: 90%; /* The width is 100%, when the viewport is 800px or smaller */
+      width: 45%;
+      height: 650px;
+      margin: 30px 10px 0 10px;
+      overflow: auto;
     }
+
+    .containerHPArticle {
+      width: 45%;
+      height: 650px;
+      margin: 30px 10px 0 10px;
+      background: #fff;
+    }
+
+    @media screen and (max-width: 800px) {
+      .containerHP {
+        width: 90%;
+      }
+      .containerHPArticle {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@keyframes loadblur {
+  0% {
+    -webkit-filter: blur(20px);
+  }
+  100% {
+    -webkit-filter: blur(0);
   }
 }

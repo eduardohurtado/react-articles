@@ -117,7 +117,7 @@ export default function ArticleForm() {
           </div>
 
           <div className="formAFContent__center">
-            <div className="userInfo">
+            <div className="userInfoGender">
               <span>
                 <b>Gender: </b>
               </span>
@@ -191,9 +191,9 @@ export default function ArticleForm() {
               <textarea
                 name="compose"
                 placeholder="Compose your Article/Post"
-                cols={30}
-                rows={7}
-                maxLength={300}
+                cols={33}
+                rows={10}
+                maxLength={400}
                 style={{ resize: "none" }}
                 value={composeValue}
                 onChange={(e) => {

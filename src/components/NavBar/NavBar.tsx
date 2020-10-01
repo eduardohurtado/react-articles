@@ -1,16 +1,17 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 //Icon
 import { SiReact } from "react-icons/si";
+import { VscBook } from "react-icons/vsc";
 
 //Style
 import "./navBar.scss";
 
 export default function NavBar() {
-  const iconStyle = {
-    margin: "15px",
+  const iconStyle: CSSProperties = {
     color: "white",
+    display: "inline-block",
   };
 
   return (
@@ -40,8 +41,13 @@ export default function NavBar() {
         </ul>
       </div>
       <div className="banner">
-        <SiReact size={40} style={iconStyle} />
+        <div className="bannerIcon">
+          <SiReact size={40} style={iconStyle} />
+        </div>
         <h1>React Articles</h1>
+        <div className="bannerIcon2">
+          <VscBook size={40} style={iconStyle} />
+        </div>
       </div>
     </>
   );
