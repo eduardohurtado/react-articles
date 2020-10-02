@@ -1,5 +1,11 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-export default function AboutPage() {
-  return <div>AboutPage</div>;
+interface IProps {
+  someProps?: unknown;
 }
+
+const AboutPage: FunctionComponent<IProps> = () => {
+  return <div>AboutPage</div>;
+};
+
+export default AboutPage;

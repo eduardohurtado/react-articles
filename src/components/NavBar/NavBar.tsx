@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 
 //Icon
@@ -8,7 +8,11 @@ import { VscBook } from "react-icons/vsc";
 //Style
 import "./navBar.scss";
 
-export default function NavBar() {
+interface IProps {
+  someProps?: unknown;
+}
+
+const NavBar: FunctionComponent<IProps> = () => {
   const iconStyle: CSSProperties = {
     color: "white",
     display: "inline-block",
@@ -51,4 +55,6 @@ export default function NavBar() {
       </div>
     </>
   );
-}
+};
+
+export default NavBar;

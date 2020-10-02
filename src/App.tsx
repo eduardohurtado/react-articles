@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 
 //Global style
@@ -12,7 +12,11 @@ import HomePage from "./components/HomePage/HomePage";
 import AboutPage from "./components/AboutPage/AboutPage";
 import ContactPage from "./components/ContactPage/ContactPage";
 
-function App() {
+interface IProps {
+  someProps?: unknown;
+}
+
+const App: FunctionComponent<IProps> = () => {
   return (
     <Router>
       <div className="gridContainer">
@@ -48,6 +52,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

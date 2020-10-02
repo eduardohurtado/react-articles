@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import $ from "jquery";
+import React, { useState, useEffect, FunctionComponent } from "react";
 
 //Icon
 import { SiCheckmarx } from "react-icons/si";
@@ -7,7 +6,11 @@ import { SiCheckmarx } from "react-icons/si";
 //Style
 import "./articleForm.scss";
 
-export default function ArticleForm() {
+interface IProps {
+  someProps?: unknown;
+}
+
+const ArticleForm: FunctionComponent<IProps> = () => {
   const [iconAuthor, updateIAuthor] = useState(false);
   const [iconTitle, updateITitle] = useState(false);
   const [iconCompose, updateICompose] = useState(false);
@@ -212,4 +215,6 @@ export default function ArticleForm() {
       </form>
     </div>
   );
-}
+};
+
+export default ArticleForm;

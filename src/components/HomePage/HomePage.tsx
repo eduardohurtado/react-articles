@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
 //Components
 import ArticleForm from "../ArticleForm/ArticleForm";
@@ -8,7 +8,11 @@ import ShowArticles from "../ShowArticles/ShowArticles";
 //Style
 import "./homePage.scss";
 
-export default function HomePage() {
+interface IProps {
+  someProps?: unknown;
+}
+
+const Component: FunctionComponent<IProps> = () => {
   return (
     <div className="gridHomePage">
       <div className="plantBanner"></div>
@@ -26,4 +30,6 @@ export default function HomePage() {
       </div>
     </div>
   );
-}
+};
+
+export default Component;

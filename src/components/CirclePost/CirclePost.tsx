@@ -1,10 +1,11 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
+
+//Icon
 import { GrNotes } from "react-icons/gr";
 
 //Style
 import "./circlePost.scss";
 
-//Interfaces
 interface IProps {
   post: {
     amount: number;
@@ -14,15 +15,16 @@ interface IProps {
   };
 }
 
-function CirclePost(props: IProps) {
+const CirclePost: FunctionComponent<IProps> = (props) => {
   const postStyle = {
-    border: `5px solid ${props.post.color.toString()}`,
+    border: `5px solid ${props.post.color}`,
   };
 
   return (
     <div className="container" style={postStyle}>
       <div className="content">
         <span>
+          {}
           <b>{props.post.amount}</b>
         </span>
         <br />
@@ -33,6 +35,6 @@ function CirclePost(props: IProps) {
       </div>
     </div>
   );
-}
+};
 
 export default CirclePost;

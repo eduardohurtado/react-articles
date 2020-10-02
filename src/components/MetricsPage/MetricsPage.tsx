@@ -1,12 +1,16 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
 //Components
-import CirclePost from "../widgets/CirclePost/CirclePost";
+import CirclePost from "../CirclePost/CirclePost";
 
 //Style
 import "./metricsPage.scss";
 
-export default function MetricsPage() {
+interface IProps {
+  someProps?: unknown;
+}
+
+const MetricsPage: FunctionComponent<IProps> = () => {
   const post = {
     amount: 3,
     title: "Article",
@@ -35,4 +39,6 @@ export default function MetricsPage() {
       </div>
     </div>
   );
-}
+};
+
+export default MetricsPage;

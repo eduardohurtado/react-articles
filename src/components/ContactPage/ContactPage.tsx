@@ -1,5 +1,11 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-export default function ContactPage() {
-  return <div>Contact page.</div>;
+interface IProps {
+  someProps?: unknown;
 }
+
+const ContactPage: FunctionComponent<IProps> = () => {
+  return <div>Contact page.</div>;
+};
+
+export default ContactPage;

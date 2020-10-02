@@ -1,8 +1,15 @@
-import React, { Component } from "react";
+import React, { FunctionComponent } from "react";
 import DataTable from "react-data-table-component";
+
+//Global state REDUX
+import { useSelector } from "react-redux";
 
 //Styles
 import "./articleList.scss";
+
+interface IProps {
+  someProps?: unknown;
+}
 
 const data = [
   { id: 1, title: "Conan the Barbarian", year: "1982" },
@@ -37,25 +44,30 @@ const columns = [
   },
 ];
 
-class MyComponent extends Component {
-  render() {
-    return (
-      <div className="articleListContainer">
-        <DataTable
-          title="Articles / Post"
-          columns={columns}
-          data={data}
-          responsive={true}
-          pagination={true}
-          highlightOnHover={true}
-          striped={true}
-          pointerOnHover={true}
-          progressPending={undefined}
-          onRowClicked={(e)=>{console.log(e);}}
-        />
-      </div>
-    );
-  }
-}
+const ArticleList: FunctionComponent<IProps> = () => {
+  const testingRedux = useSelector((state) => state);
 
-export default MyComponent;
+  return (
+    <div className="articleListContainer">
+      <DataTable
+        title="Articles / Post"
+        columns={columns}
+        data={data}
+        responsive={true}
+        pagination={true}
+        highlightOnHover={true}
+        striped={true}
+        pointerOnHover={true}
+        progressPending={undefined}
+        onRowClicked={(e) => {
+          console.log(e);
+          {
+            console.log(testingRedux);
+          }
+        }}
+      />
+    </div>
+  );
+};
+
+export default ArticleList;
