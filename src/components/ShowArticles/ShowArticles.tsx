@@ -4,5 +4,5 @@ import React from "react";
 import "./showArticles.scss";
 
 export default function ShowArticles() {
-  return <div></div>;
+  return <div className="articleShow"></div>;
 }
