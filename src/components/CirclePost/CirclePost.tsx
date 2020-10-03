@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 
 //Icon
 import { GrNotes } from "react-icons/gr";
@@ -15,7 +15,7 @@ interface IProps {
   };
 }
 
-const CirclePost: FunctionComponent<IProps> = (props) => {
+const CirclePost: FC<IProps> = (props) => {
   const postStyle = {
     border: `5px solid ${props.post.color}`,
   };

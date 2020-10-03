@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import DataTable from "react-data-table-component";
 
 //Global state REDUX
@@ -44,7 +44,7 @@ const columns = [
   },
 ];
 
-const ArticleList: FunctionComponent<IProps> = () => {
+const ArticleList: FC<IProps> = () => {
   const testingRedux = useSelector((state) => state);
 
   return (

@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 
 interface IProps {
   someProps?: unknown;
 }
 
-const AboutPage: FunctionComponent<IProps> = () => {
+const AboutPage: FC<IProps> = () => {
   return <div>AboutPage</div>;
 };
 

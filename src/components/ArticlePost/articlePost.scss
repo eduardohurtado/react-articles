@@ -1,0 +1,21 @@
+.containerAPF {
+  width: 100%;
+  height: min-content;
+  display: flex;
+
+  .headerAP {
+    width: 300px;
+    height: 200px;
+    background: salmon;
+    margin: auto;
+    display: block;
+  }
+
+  .bodyAP {
+    width: 300px;
+    height: 600px;
+    background: teal;
+    margin: auto;
+    display: block;
+  }
+}

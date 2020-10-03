@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 
 //Components
 import ArticleForm from "../ArticleForm/ArticleForm";
@@ -12,7 +12,7 @@ interface IProps {
   someProps?: unknown;
 }
 
-const Component: FunctionComponent<IProps> = () => {
+const Component: FC<IProps> = () => {
   return (
     <div className="gridHomePage">
       <div className="plantBanner"></div>

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 
 //Global style
@@ -16,7 +16,7 @@ interface IProps {
   someProps?: unknown;
 }
 
-const App: FunctionComponent<IProps> = () => {
+const App: FC<IProps> = () => {
   return (
     <Router>
       <div className="gridContainer">

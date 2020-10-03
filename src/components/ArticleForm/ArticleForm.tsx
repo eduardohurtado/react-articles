@@ -1,7 +1,7 @@
-import React, { useState, useEffect, FunctionComponent } from "react";
+import React, { useState, useEffect, FC } from "react";
 
 //Icon
-import { SiCheckmarx } from "react-icons/si";
+import { ImCheckboxChecked } from "react-icons/im";
 
 //Style
 import "./articleForm.scss";
@@ -10,7 +10,7 @@ interface IProps {
   someProps?: unknown;
 }
 
-const ArticleForm: FunctionComponent<IProps> = () => {
+const ArticleForm: FC<IProps> = () => {
   const [iconAuthor, updateIAuthor] = useState(false);
   const [iconTitle, updateITitle] = useState(false);
   const [iconCompose, updateICompose] = useState(false);
@@ -66,19 +66,19 @@ const ArticleForm: FunctionComponent<IProps> = () => {
       <form>
         <div className="formAF__header">
           <div className="itemAF">
-            <SiCheckmarx style={iconAuthor ? iconDone : iconDefault} />
+            <ImCheckboxChecked style={iconAuthor ? iconDone : iconDefault} />
             <span>
               <b> Author</b>
             </span>
           </div>
           <div className="itemAF">
-            <SiCheckmarx style={iconTitle ? iconDone : iconDefault} />
+            <ImCheckboxChecked style={iconTitle ? iconDone : iconDefault} />
             <span>
               <b> Title</b>
             </span>
           </div>
           <div className="itemAF">
-            <SiCheckmarx style={iconCompose ? iconDone : iconDefault} />
+            <ImCheckboxChecked style={iconCompose ? iconDone : iconDefault} />
             <span>
               <b> Compose</b>
             </span>
@@ -172,7 +172,9 @@ const ArticleForm: FunctionComponent<IProps> = () => {
           {articlePost && (
             <div className="formAFContent__center">
               <div className="userInfo">
-                <p>Title:</p>
+                <p>
+                  <b>Title:</b>
+                </p>
                 <input
                   type="text"
                   name="title"
@@ -190,7 +192,9 @@ const ArticleForm: FunctionComponent<IProps> = () => {
 
           <div className="formAFContent__center">
             <div className="userInfo">
-              <p>Compose:</p>
+              <p>
+                <b>Compose:</b>
+              </p>
               <textarea
                 name="compose"
                 placeholder="Compose your Article/Post"

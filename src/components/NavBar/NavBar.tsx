@@ -1,5 +1,8 @@
-import React, { CSSProperties, FunctionComponent } from "react";
+import React, { CSSProperties, FC } from "react";
 import { Link } from "react-router-dom";
+
+//Text scramble
+import TextScramble from "@twistezo/react-text-scramble";
 
 //Icon
 import { SiReact } from "react-icons/si";
@@ -12,7 +15,7 @@ interface IProps {
   someProps?: unknown;
 }
 
-const NavBar: FunctionComponent<IProps> = () => {
+const NavBar: FC<IProps> = () => {
   const iconStyle: CSSProperties = {
     color: "white",
     display: "inline-block",
@@ -48,7 +51,12 @@ const NavBar: FunctionComponent<IProps> = () => {
         <div className="bannerIcon">
           <SiReact size={40} style={iconStyle} />
         </div>
-        <h1>React Articles</h1>
+        <TextScramble
+          texts={["React Articles"]}
+          letterSpeed={50}
+          className="h1Title"
+          nextLetterSpeed={200}
+        />
         <div className="bannerIcon2">
           <VscBook size={40} style={iconStyle} />
         </div>

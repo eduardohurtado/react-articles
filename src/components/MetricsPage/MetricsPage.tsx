@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 
 //Components
 import CirclePost from "../CirclePost/CirclePost";
@@ -10,7 +10,7 @@ interface IProps {
   someProps?: unknown;
 }
 
-const MetricsPage: FunctionComponent<IProps> = () => {
+const MetricsPage: FC<IProps> = () => {
   const post = {
     amount: 3,
     title: "Article",
