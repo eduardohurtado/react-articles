@@ -9,7 +9,9 @@ interface IProps {
 const ArticlePost: FC<IProps> = () => {
   return (
     <div className="containerAPF">
-      <div className="headerAP">TITLE</div>
+      <div className="headerAP">
+        <span className="headerAP__Title">TITLE</span>
+      </div>
       <div className="bodyAP">DESCRIPTION</div>
     </div>
   );
