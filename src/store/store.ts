@@ -1,4 +1,3 @@
-//Interfaces
 interface IAppStateMongo {
   articles: {
     id: string;
@@ -24,6 +23,21 @@ const initialStateMongo: IAppStateMongo = {
   articles: [
     {
       id: "5",
+      title: "Testing title redux",
+      description: "1993",
+    },
+    {
+      id: "6",
+      title: "Testing title redux",
+      description: "1993",
+    },
+    {
+      id: "7",
+      title: "Testing title redux",
+      description: "1993",
+    },
+    {
+      id: "8",
       title: "Testing title redux",
       description: "1993",
     },

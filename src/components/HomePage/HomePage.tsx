@@ -4,6 +4,7 @@ import React from "react";
 import ArticleForm from "../ArticleForm/ArticleForm";
 import ArticleList from "../ArticleList/ArticleList";
 import ShowArticles from "../ShowArticles/ShowArticles";
+import Footer from "../Footer/Footer";
 
 //Style
 import "./homePage.scss";
@@ -24,6 +25,7 @@ const Component = (): JSX.Element => {
           <ShowArticles />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
