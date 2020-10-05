@@ -12,7 +12,9 @@ const ArticlePost: FC<IProps> = () => {
       <div className="headerAP">
         <span className="headerAP__Title">TITLE</span>
       </div>
-      <div className="bodyAP">DESCRIPTION</div>
+      <div className="bodyAP">
+        <p>DESCRIPTION</p>
+      </div>
     </div>
   );
 };
