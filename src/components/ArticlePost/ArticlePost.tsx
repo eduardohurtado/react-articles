@@ -1,19 +1,24 @@
-import React, { FC } from "react";
+import React from "react";
 
+//Style
 import "./articlePost.scss";
 
 interface IProps {
-  someProps?: unknown;
+  payload: {
+    id: string;
+    title: string;
+    description: string;
+  };
 }
 
-const ArticlePost: FC<IProps> = () => {
+const ArticlePost = (props: IProps): JSX.Element => {
   return (
     <div className="containerAPF">
       <div className="headerAP">
-        <span className="headerAP__Title">TITLE</span>
+        <span className="headerAP__Title">{props.payload.title}</span>
       </div>
       <div className="bodyAP">
-        <p>DESCRIPTION</p>
+        <p>{props.payload.description}</p>
       </div>
     </div>
   );

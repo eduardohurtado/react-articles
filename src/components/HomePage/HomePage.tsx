@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 //Components
 import ArticleForm from "../ArticleForm/ArticleForm";
@@ -8,11 +8,7 @@ import ShowArticles from "../ShowArticles/ShowArticles";
 //Style
 import "./homePage.scss";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const Component: FC<IProps> = () => {
+const Component = (): JSX.Element => {
   return (
     <div className="gridHomePage">
       <div className="plantBanner"></div>

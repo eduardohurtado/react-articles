@@ -1,10 +1,6 @@
-import React, { FC } from "react";
+import React from "react";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const AboutPage: FC<IProps> = () => {
+const AboutPage = (): JSX.Element => {
   return <div>AboutPage</div>;
 };
 

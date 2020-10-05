@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 //Icon
 import { GrNotes } from "react-icons/gr";
@@ -15,7 +15,7 @@ interface IProps {
   };
 }
 
-const CirclePost: FC<IProps> = (props) => {
+const CirclePost = (props: IProps): JSX.Element => {
   const postStyle = {
     border: `5px solid ${props.post.color}`,
   };

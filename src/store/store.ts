@@ -2,10 +2,10 @@
 interface IAppStateMongo {
   articles: {
     id: string;
-    name: string;
+    name?: string;
     title: string;
     description: string;
-    gender: string;
+    gender?: string;
   }[];
   isLoading: boolean;
 }
@@ -21,7 +21,13 @@ interface IAction {
 
 //APP default initial state
 const initialStateMongo: IAppStateMongo = {
-  articles: [],
+  articles: [
+    {
+      id: "5",
+      title: "Testing title redux",
+      description: "1993",
+    },
+  ],
   isLoading: true,
 };
 

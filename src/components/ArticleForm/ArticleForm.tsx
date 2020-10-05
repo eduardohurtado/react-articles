@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect } from "react";
 
 //Icon
 import { ImCheckboxChecked } from "react-icons/im";
@@ -6,11 +6,7 @@ import { ImCheckboxChecked } from "react-icons/im";
 //Style
 import "./articleForm.scss";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const ArticleForm: FC<IProps> = () => {
+const ArticleForm = (): JSX.Element => {
   const [iconAuthor, updateIAuthor] = useState(false);
   const [iconTitle, updateITitle] = useState(false);
   const [iconCompose, updateICompose] = useState(false);

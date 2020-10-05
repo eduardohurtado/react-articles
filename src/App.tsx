@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 
 //Global style
@@ -12,11 +12,7 @@ import HomePage from "./components/HomePage/HomePage";
 import AboutPage from "./components/AboutPage/AboutPage";
 import ContactPage from "./components/ContactPage/ContactPage";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const App: FC<IProps> = () => {
+const App = (): JSX.Element => {
   return (
     <Router>
       <div className="gridContainer">

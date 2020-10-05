@@ -1,15 +1,11 @@
-import React, { FC } from "react";
-import DataTable from "react-data-table-component";
+import React from "react";
+import DataTable, { createTheme } from "react-data-table-component";
 
 //Global state REDUX
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 //Styles
 import "./articleList.scss";
-
-interface IProps {
-  someProps?: unknown;
-}
 
 const data = [
   { id: 1, title: "Conan the Barbarian", year: "1982" },
@@ -44,8 +40,31 @@ const columns = [
   },
 ];
 
-const ArticleList: FC<IProps> = () => {
+const ArticleList = (): JSX.Element => {
   const testingRedux = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  createTheme("solarized", {
+    text: {
+      primary: "#eee",
+      secondary: "#2aa198",
+    },
+    background: {
+      default: "#002b36",
+    },
+    context: {
+      background: "#cb4b16",
+      text: "#FFFFFF",
+    },
+    divider: {
+      default: "#fff",
+    },
+    action: {
+      button: "rgba(0,0,0,.54)",
+      hover: "rgba(0,0,0,.08)",
+      disabled: "rgba(0,0,0,.12)",
+    },
+  });
 
   return (
     <div className="articleListContainer">
@@ -59,11 +78,11 @@ const ArticleList: FC<IProps> = () => {
         striped={true}
         pointerOnHover={true}
         progressPending={undefined}
+        theme="solarized"
         onRowClicked={(e) => {
           console.log(e);
-          {
-            console.log(testingRedux);
-          }
+          console.log(testingRedux);
+          dispatch({ type: "TEST" });
         }}
       />
     </div>

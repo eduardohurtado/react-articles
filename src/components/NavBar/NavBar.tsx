@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 //Text scramble
@@ -11,11 +11,7 @@ import { VscBook } from "react-icons/vsc";
 //Style
 import "./navBar.scss";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const NavBar: FC<IProps> = () => {
+const NavBar = (): JSX.Element => {
   const iconStyle: CSSProperties = {
     color: "white",
     display: "inline-block",

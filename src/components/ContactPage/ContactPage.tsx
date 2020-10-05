@@ -1,10 +1,6 @@
-import React, { FC } from "react";
+import React from "react";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const ContactPage: FC<IProps> = () => {
+const ContactPage = (): JSX.Element => {
   return <div>Contact page.</div>;
 };
 

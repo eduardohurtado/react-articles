@@ -1,22 +1,35 @@
-import React, { FC } from "react";
+import React from "react";
 
 //Components
 import ArticlePost from "../ArticlePost/ArticlePost";
 
+//Global state REDUX
+import { useSelector } from "react-redux";
+
 //Style
 import "./showArticles.scss";
 
-interface IProps {
-  someProps?: unknown;
+interface Redux {
+  articles: {
+    id: string;
+    title: string;
+    description: string;
+  }[];
 }
 
-const ShowArticles: FC<IProps> = () => {
+const ShowArticles = (): JSX.Element => {
+  const articlesRedux = useSelector((state: Redux) => state.articles);
+
   return (
-    <div className="articleShowSA">
-      <div className="articlePostShow">
-        <ArticlePost />
-      </div>
-    </div>
+    <>
+      {articlesRedux.map((e) => (
+        <div className="articleShowSA" key={e.id}>
+          <div className="articlePostShow" key={e.id}>
+            <ArticlePost key={e.id} payload={e} />
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 

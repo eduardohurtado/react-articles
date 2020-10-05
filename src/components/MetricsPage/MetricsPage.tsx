@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 //Components
 import CirclePost from "../CirclePost/CirclePost";
@@ -6,11 +6,7 @@ import CirclePost from "../CirclePost/CirclePost";
 //Style
 import "./metricsPage.scss";
 
-interface IProps {
-  someProps?: unknown;
-}
-
-const MetricsPage: FC<IProps> = () => {
+const MetricsPage = (): JSX.Element => {
   const post = {
     amount: 3,
     title: "Article",
