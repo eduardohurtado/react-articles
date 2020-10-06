@@ -2,24 +2,24 @@ import React from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
 //Global state REDUX
-import { useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 
 //Styles
 import "./articleList.scss";
 
 const data = [
-  { id: 1, title: "Conan the Barbarian", year: "1982" },
-  { id: 2, title: "Conan the Barbarian", year: "1982" },
-  { id: 3, title: "Conan the Barbarian", year: "1982" },
-  { id: 4, title: "Conan the Barbarian", year: "1982" },
-  { id: 5, title: "Conan the Barbarian", year: "1982" },
-  { id: 6, title: "Conan the Barbarian", year: "1982" },
-  { id: 7, title: "Conan the Barbarian", year: "1982" },
-  { id: 8, title: "Conan the Barbarian", year: "1982" },
-  { id: 9, title: "Conan the Barbarian", year: "1982" },
-  { id: 10, title: "Conan the Barbarian", year: "1982" },
-  { id: 11, title: "Conan the Barbarian", year: "1982" },
-  { id: 12, title: "Conan the Barbarian", year: "1982" },
+  { id: 1, title: "Conan the Barbarian", description: "1982" },
+  { id: 2, title: "Conan the Barbarian", description: "1982" },
+  { id: 3, title: "Conan the Barbarian", description: "1982" },
+  { id: 4, title: "Conan the Barbarian", description: "1982" },
+  { id: 5, title: "Conan the Barbarian", description: "1982" },
+  { id: 6, title: "Conan the Barbarian", description: "1982" },
+  { id: 7, title: "Conan the Barbarian", description: "1982" },
+  { id: 8, title: "Conan the Barbarian", description: "1982" },
+  { id: 9, title: "Conan the Barbarian", description: "1982" },
+  { id: 10, title: "Conan the Barbarian", description: "1982" },
+  { id: 11, title: "Conan the Barbarian", description: "1982" },
+  { id: 12, title: "Conan the Barbarian", description: "1982" },
 ];
 const columns = [
   {
@@ -40,10 +40,23 @@ const columns = [
   },
 ];
 
-const ArticleList = (): JSX.Element => {
-  const testingRedux = useSelector((state) => state);
-  const dispatch = useDispatch();
+interface IProps {
+  tasks?: {
+    id: number;
+    title: string;
+    description: string;
+    done: boolean;
+  };
+  addTaskRedux: any;
+}
 
+interface IAction {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const ArticleList = (props: IProps): JSX.Element => {
   createTheme("solarized", {
     text: {
       primary: "#eee",
@@ -80,13 +93,18 @@ const ArticleList = (): JSX.Element => {
         progressPending={undefined}
         theme="solarized"
         onRowClicked={(e) => {
-          console.log(e);
-          console.log(testingRedux);
-          dispatch({ type: "TEST" });
+          props.addTaskRedux(e);
         }}
       />
     </div>
   );
 };
 
-export default ArticleList;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addTaskRedux: (payload: IAction) =>
+      dispatch({ type: "ADD_ARTICLE", payload }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ArticleList);

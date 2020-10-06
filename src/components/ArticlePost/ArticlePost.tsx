@@ -5,7 +5,7 @@ import "./articlePost.scss";
 
 interface IProps {
   payload: {
-    id: string;
+    id: number;
     title: string;
     description: string;
   };

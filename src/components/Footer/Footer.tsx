@@ -6,7 +6,14 @@ const Footer = (): JSX.Element => {
   return (
     <div className="footerContainer">
       <div className="footerbanner"></div>
-      <div className="footerContainer"></div>
+      <div className="footerContainer">
+        <p>
+          React Articles®
+          <br />
+          All rights reserved
+        </p>
+        <span>2020</span>
+      </div>
     </div>
   );
 };

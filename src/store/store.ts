@@ -1,43 +1,29 @@
 interface IAppStateMongo {
   articles: {
-    id: string;
-    name?: string;
+    id: number;
     title: string;
     description: string;
-    gender?: string;
   }[];
   isLoading: boolean;
 }
 
 interface IAction {
   type: string;
-  id: string;
+  id: number;
   title: string;
   description: string;
-  gender: string;
-  payload: [];
+  payload: {
+    id: number;
+    title: string;
+    description: string;
+  };
 }
 
 //APP default initial state
 const initialStateMongo: IAppStateMongo = {
   articles: [
     {
-      id: "5",
-      title: "Testing title redux",
-      description: "1993",
-    },
-    {
-      id: "6",
-      title: "Testing title redux",
-      description: "1993",
-    },
-    {
-      id: "7",
-      title: "Testing title redux",
-      description: "1993",
-    },
-    {
-      id: "8",
+      id: 50,
       title: "Testing title redux",
       description: "1993",
     },
@@ -49,24 +35,16 @@ const reducer = (
   state = initialStateMongo,
   action: IAction
 ): IAppStateMongo => {
-  if (action.type === "DOWNLOAD_TASKS_MONGO") {
-    const checkIfEmpty = (): boolean => {
-      if (action.payload.length < 1) {
-        return true;
-      } else {
-        return false;
-      }
-    };
+  if (action.type === "ADD_ARTICLE") {
+    let actualState = state.articles;
+    actualState.push(action.payload);
+    console.log("Nuevos datos en store:");
+    console.log(actualState);
     return {
       ...state,
 
-      articles: action.payload,
-      isLoading: checkIfEmpty(),
+      articles: [...actualState],
     };
-  } else if (action.type === "TASK_DELETE") {
-    console.log("Task deleted from server:", action.id);
-  } else if (action.type === "TEST") {
-    console.log("Test looking good.");
   }
 
   return state;

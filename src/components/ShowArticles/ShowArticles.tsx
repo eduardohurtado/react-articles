@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //Components
 import ArticlePost from "../ArticlePost/ArticlePost";
 
 //Global state REDUX
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 //Style
 import "./showArticles.scss";
 
-interface Redux {
+interface IProps {
   articles: {
-    id: string;
+    id: number;
     title: string;
     description: string;
   }[];
 }
 
-const ShowArticles = (): JSX.Element => {
-  const articlesRedux = useSelector((state: Redux) => state.articles);
+const ShowArticles = (props: IProps): JSX.Element => {
+  const [articlesRedux, updateArticlesRedux] = useState([
+    {
+      id: -1,
+      title: "",
+      description: "",
+    },
+  ]);
+
+  useEffect(() => {
+    console.log("articles on props:");
+    console.log(props.articles);
+    updateArticlesRedux([...props.articles]);
+  }, [props.articles]);
 
   return (
     <>
@@ -29,8 +41,18 @@ const ShowArticles = (): JSX.Element => {
           </div>
         </div>
       ))}
+      {() => {
+        console.log("Render prop articles:");
+        console.log(props.articles);
+      }}
     </>
   );
 };
 
-export default ShowArticles;
+const mapStateToProps = (state: IProps) => {
+  return {
+    articles: state.articles,
+  };
+};
+
+export default connect(mapStateToProps)(ShowArticles);

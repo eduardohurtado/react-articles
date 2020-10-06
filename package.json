@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "clean": "rimraf build node_modules"
+    "clean": "rimraf node_modules build"
   },
   "repository": {
     "type": "git",
