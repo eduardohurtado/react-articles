@@ -31,8 +31,6 @@ const reducer = (
   if (action.type === "ADD_ARTICLE") {
     const actualState = state.articles;
     actualState.push(action.payload);
-    console.log("Nuevos datos en store:");
-    console.log(actualState);
 
     return {
       articles: [...actualState],

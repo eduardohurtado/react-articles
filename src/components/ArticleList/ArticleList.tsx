@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 //Notification
-import { notifySuccess } from "../Notification/Notification";
+import { notifySuccess, notifyDanger } from "../Notification/Notification";
 
 //Styles
 import "./articleList.scss";
@@ -18,14 +18,21 @@ const data = [
     description:
       "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
   },
+  {
+    id: 1,
+    title: "Welcome to my App",
+    description:
+      "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
+  },
+  {
+    id: 2,
+    title: "Welcome to my App",
+    description:
+      "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
+  },
 ];
 
 const columns = [
-  // {
-  //   name: "ID",
-  //   selector: "id",
-  //   sortable: true,
-  // },
   {
     name: "Title",
     selector: "title",
@@ -40,13 +47,12 @@ const columns = [
 ];
 
 interface IProps {
-  tasks?: {
+  articles: {
     id: number;
     title: string;
     description: string;
-    done: boolean;
-  };
-  addTaskRedux: (payload: IAction) => void;
+  }[];
+  addArticleRedux: (payload: IAction) => void;
 }
 
 interface IAction {
@@ -78,6 +84,15 @@ const ArticleList: React.FC<IProps> = (props) => {
     },
   });
 
+  const checkIfDisplayed = (id: number): boolean => {
+    const articlesId = [];
+
+    for (let i = 0; i < props.articles.length; i++) {
+      articlesId[i] = props.articles[i].id;
+    }
+    return articlesId.every((xId: number) => xId !== id);
+  };
+
   return (
     <div className="articleListContainer">
       <DataTable
@@ -92,19 +107,34 @@ const ArticleList: React.FC<IProps> = (props) => {
         progressPending={undefined}
         theme="solarized"
         onRowClicked={(e) => {
-          props.addTaskRedux(e);
-          notifySuccess("Done", "Article/Post displayed", 1500);
+          if (props.articles.length === 0) {
+            props.addArticleRedux(e);
+            notifySuccess("Done", "Article/Post displayed", 1500);
+          } else {
+            if (checkIfDisplayed(e.id)) {
+              props.addArticleRedux(e);
+              notifySuccess("Done", "Article/Post displayed", 1500);
+            } else {
+              notifyDanger("ERROR", "The article is already displayed", 3000);
+            }
+          }
         }}
       />
     </div>
   );
 };
 
+const mapStateToProps = (state: IProps) => {
+  return {
+    articles: state.articles,
+  };
+};
+
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    addTaskRedux: (payload: IAction) =>
+    addArticleRedux: (payload: IAction) =>
       dispatch({ type: "ADD_ARTICLE", payload }),
   };
 };
 
-export default connect(null, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
