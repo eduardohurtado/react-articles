@@ -11,7 +11,7 @@ import { VscBook } from "react-icons/vsc";
 //Style
 import "./navBar.scss";
 
-const NavBar = (): JSX.Element => {
+const NavBar: React.FC = () => {
   const iconStyle: CSSProperties = {
     color: "white",
     display: "inline-block",

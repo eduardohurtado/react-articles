@@ -15,7 +15,7 @@ interface IProps {
   };
 }
 
-const CirclePost = (props: IProps): JSX.Element => {
+const CirclePost: React.FC<IProps> = (props) => {
   const postStyle = {
     border: `5px solid ${props.post.color}`,
   };

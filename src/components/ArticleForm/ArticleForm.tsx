@@ -6,7 +6,7 @@ import { ImCheckboxChecked } from "react-icons/im";
 //Style
 import "./articleForm.scss";
 
-const ArticleForm = (): JSX.Element => {
+const ArticleForm: React.FC = () => {
   const [iconAuthor, updateIAuthor] = useState(false);
   const [iconTitle, updateITitle] = useState(false);
   const [iconCompose, updateICompose] = useState(false);

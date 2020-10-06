@@ -19,15 +19,8 @@ interface IAction {
   };
 }
 
-//APP default initial state
 const initialStateMongo: IAppStateMongo = {
-  articles: [
-    {
-      id: 50,
-      title: "Testing title redux",
-      description: "1993",
-    },
-  ],
+  articles: [],
   isLoading: true,
 };
 
@@ -36,14 +29,14 @@ const reducer = (
   action: IAction
 ): IAppStateMongo => {
   if (action.type === "ADD_ARTICLE") {
-    let actualState = state.articles;
+    const actualState = state.articles;
     actualState.push(action.payload);
     console.log("Nuevos datos en store:");
     console.log(actualState);
-    return {
-      ...state,
 
+    return {
       articles: [...actualState],
+      isLoading: false,
     };
   }
 

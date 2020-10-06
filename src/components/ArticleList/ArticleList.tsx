@@ -3,6 +3,7 @@ import DataTable, { createTheme } from "react-data-table-component";
 
 //Global state REDUX
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 //Styles
 import "./articleList.scss";
@@ -47,7 +48,7 @@ interface IProps {
     description: string;
     done: boolean;
   };
-  addTaskRedux: any;
+  addTaskRedux: (payload: IAction) => void;
 }
 
 interface IAction {
@@ -56,14 +57,14 @@ interface IAction {
   description: string;
 }
 
-const ArticleList = (props: IProps): JSX.Element => {
+const ArticleList: React.FC<IProps> = (props) => {
   createTheme("solarized", {
     text: {
       primary: "#eee",
       secondary: "#2aa198",
     },
     background: {
-      default: "#002b36",
+      default: "#293241",
     },
     context: {
       background: "#cb4b16",
@@ -100,7 +101,7 @@ const ArticleList = (props: IProps): JSX.Element => {
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addTaskRedux: (payload: IAction) =>
       dispatch({ type: "ADD_ARTICLE", payload }),

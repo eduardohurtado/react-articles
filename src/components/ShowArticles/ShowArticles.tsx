@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-//Components
-import ArticlePost from "../ArticlePost/ArticlePost";
-
 //Global state REDUX
 import { connect } from "react-redux";
+
+//Components
+import ArticlePost from "../ArticlePost/ArticlePost";
 
 //Style
 import "./showArticles.scss";
@@ -17,7 +17,7 @@ interface IProps {
   }[];
 }
 
-const ShowArticles = (props: IProps): JSX.Element => {
+const ShowArticles: React.FC<IProps> = (props) => {
   const [articlesRedux, updateArticlesRedux] = useState([
     {
       id: -1,
@@ -27,8 +27,6 @@ const ShowArticles = (props: IProps): JSX.Element => {
   ]);
 
   useEffect(() => {
-    console.log("articles on props:");
-    console.log(props.articles);
     updateArticlesRedux([...props.articles]);
   }, [props.articles]);
 

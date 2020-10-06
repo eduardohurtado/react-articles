@@ -6,7 +6,7 @@ import CirclePost from "../CirclePost/CirclePost";
 //Style
 import "./metricsPage.scss";
 
-const MetricsPage = (): JSX.Element => {
+const MetricsPage: React.FC = () => {
   const post = {
     amount: 3,
     title: "Article",

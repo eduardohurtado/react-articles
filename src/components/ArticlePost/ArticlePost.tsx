@@ -11,7 +11,7 @@ interface IProps {
   };
 }
 
-const ArticlePost = (props: IProps): JSX.Element => {
+const ArticlePost: React.FC<IProps> = (props) => {
   return (
     <div className="containerAPF">
       <div className="headerAP">

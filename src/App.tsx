@@ -12,7 +12,7 @@ import HomePage from "./components/HomePage/HomePage";
 import AboutPage from "./components/AboutPage/AboutPage";
 import ContactPage from "./components/ContactPage/ContactPage";
 
-const App = (): JSX.Element => {
+const App: React.FC = () => {
   return (
     <Router>
       <div className="gridContainer">
