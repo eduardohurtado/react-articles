@@ -5,39 +5,37 @@ import DataTable, { createTheme } from "react-data-table-component";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
+//Notification
+import { notifySuccess } from "../Notification/Notification";
+
 //Styles
 import "./articleList.scss";
 
 const data = [
-  { id: 1, title: "Conan the Barbarian", description: "1982" },
-  { id: 2, title: "Conan the Barbarian", description: "1982" },
-  { id: 3, title: "Conan the Barbarian", description: "1982" },
-  { id: 4, title: "Conan the Barbarian", description: "1982" },
-  { id: 5, title: "Conan the Barbarian", description: "1982" },
-  { id: 6, title: "Conan the Barbarian", description: "1982" },
-  { id: 7, title: "Conan the Barbarian", description: "1982" },
-  { id: 8, title: "Conan the Barbarian", description: "1982" },
-  { id: 9, title: "Conan the Barbarian", description: "1982" },
-  { id: 10, title: "Conan the Barbarian", description: "1982" },
-  { id: 11, title: "Conan the Barbarian", description: "1982" },
-  { id: 12, title: "Conan the Barbarian", description: "1982" },
-];
-const columns = [
   {
-    name: "ID",
-    selector: "id",
-    sortable: true,
+    id: 0,
+    title: "Welcome to my App",
+    description:
+      "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
   },
+];
+
+const columns = [
+  // {
+  //   name: "ID",
+  //   selector: "id",
+  //   sortable: true,
+  // },
   {
     name: "Title",
     selector: "title",
     sortable: true,
   },
   {
-    name: "Year",
-    selector: "year",
+    name: "Description",
+    selector: "description",
     sortable: true,
-    right: true,
+    // right: true,
   },
 ];
 
@@ -95,6 +93,7 @@ const ArticleList: React.FC<IProps> = (props) => {
         theme="solarized"
         onRowClicked={(e) => {
           props.addTaskRedux(e);
+          notifySuccess("Done", "Article/Post displayed", 1500);
         }}
       />
     </div>

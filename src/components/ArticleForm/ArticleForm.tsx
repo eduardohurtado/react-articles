@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 //Icon
 import { ImCheckboxChecked } from "react-icons/im";
 
+//Notification
+import { notifyDanger } from "../Notification/Notification";
+
 //Style
 import "./articleForm.scss";
 
@@ -25,7 +28,23 @@ const ArticleForm: React.FC = () => {
 
   onsubmit = (e) => {
     e.preventDefault();
-    console.log(nameValue);
+
+    if (iconAuthor === false || iconTitle === false || iconCompose === false) {
+      notifyDanger("ERROR", "Please fill all form fields", 3000);
+    } else {
+      console.log(nameValue);
+      console.log(lastnameValue);
+      const radioSelected = (document.getElementsByName(
+        "b-userInfo"
+      ) as unknown) as HTMLInputElement[];
+      for (let i = 0; i < radioSelected.length; i++) {
+        if (radioSelected[i].checked) {
+          console.log(radioSelected[i].value);
+        }
+      }
+      console.log(titleValue);
+      console.log(composeValue);
+    }
   };
 
   useEffect(() => {
@@ -39,9 +58,12 @@ const ArticleForm: React.FC = () => {
   useEffect(() => {
     if (articlePost === false) {
       updateITitle(true);
+      updateTitle("Post");
     } else {
       updateITitle(false);
-      if (titleValue !== "") {
+      if (titleValue === "Post") {
+        updateTitle("");
+      } else if (titleValue !== "") {
         updateITitle(true);
       } else {
         updateITitle(false);
@@ -80,6 +102,7 @@ const ArticleForm: React.FC = () => {
             </span>
           </div>
         </div>
+
         <div className="formAFContent">
           <div className="formAFContent__center">
             <div className="userInfoName">
@@ -124,7 +147,7 @@ const ArticleForm: React.FC = () => {
                 type="radio"
                 name="b-userInfo"
                 id="b-male"
-                value="b-male"
+                value="Male"
                 defaultChecked
               />
               <label htmlFor="b-male"> Male </label>
@@ -132,14 +155,14 @@ const ArticleForm: React.FC = () => {
                 type="radio"
                 name="b-userInfo"
                 id="b-female"
-                value="b-female"
+                value="Female"
               />
               <label htmlFor="b-female"> Female </label>
               <input
                 type="radio"
                 name="b-userInfo"
                 id="b-other"
-                value="b-other"
+                value="Other"
               />
               <label htmlFor="b-other"> Other </label>
             </div>
