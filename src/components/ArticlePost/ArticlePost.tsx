@@ -1,24 +1,14 @@
 import React from "react";
 
-//Global state REDUX
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
-
-//Style
+// Style
 import "./articlePost.scss";
 
 interface IProps {
   payload: {
-    id: number;
+    _id: string;
     title: string;
     description: string;
   };
-}
-
-interface IAction { //REDUX is to add a button to delete
-  id: number;
-  title: string;
-  description: string;
 }
 
 const ArticlePost: React.FC<IProps> = (props) => {
@@ -34,11 +24,4 @@ const ArticlePost: React.FC<IProps> = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    addTaskRedux: (payload: IAction) =>
-      dispatch({ type: "ADD_ARTICLE", payload }),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(ArticlePost);
+export default ArticlePost;

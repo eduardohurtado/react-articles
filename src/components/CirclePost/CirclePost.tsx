@@ -1,9 +1,9 @@
 import React from "react";
 
-//Icon
+// Icon
 import { GrNotes } from "react-icons/gr";
 
-//Style
+// Style
 import "./circlePost.scss";
 
 interface IProps {

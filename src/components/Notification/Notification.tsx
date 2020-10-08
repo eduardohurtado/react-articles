@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 
-//Store notification component
+// Store notification component
 import { store } from "react-notifications-component";
 import "animate.css/animate.compat.css";
 

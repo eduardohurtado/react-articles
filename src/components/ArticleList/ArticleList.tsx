@@ -1,41 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
-//Global state REDUX
+// GraphQL
+import { useQuery, gql } from "@apollo/client";
+
+// Global state REDUX
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-//Notification
+// Notification
 import { notifySuccess, notifyDanger } from "../Notification/Notification";
 
-//Styles
+// Styles
 import "./articleList.scss";
 
-const data = [
-  {
-    id: 0,
-    title: "Welcome to my App",
-    description:
-      "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
-  },
-  {
-    id: 1,
-    title: "Welcome to my App",
-    description:
-      "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
-  },
-  {
-    id: 2,
-    title: "Welcome to my App",
-    description:
-      "I made this App to improve skills and well practices on React togheter with GraphQl and redux global state control, please enjoy.",
-  },
-];
+// Queries/Mutations
+const GET_ARTICLES = gql`
+  query {
+    articles {
+      _id
+      name
+      lastName
+      gender
+      title
+      description
+    }
+  }
+`;
 
 const columns = [
   {
     name: "Title",
     selector: "title",
+    sortable: true,
+  },
+  {
+    name: "Name",
+    selector: "name",
     sortable: true,
   },
   {
@@ -48,7 +49,10 @@ const columns = [
 
 interface IProps {
   articles: {
-    id: number;
+    _id: string;
+    name: string;
+    lastName: string;
+    gender: string;
     title: string;
     description: string;
   }[];
@@ -56,19 +60,40 @@ interface IProps {
 }
 
 interface IAction {
-  id: number;
+  _id: string;
+  name: string;
+  lastName: string;
+  gender: string;
   title: string;
   description: string;
 }
 
 const ArticleList: React.FC<IProps> = (props) => {
+  const [loadingTable, changeLoadingTable] = useState(true);
+  const [dataTable, changeDataTable] = useState([]);
+  const { loading, error, data } = useQuery(GET_ARTICLES);
+
+  if (error) {
+    console.error(error);
+  }
+
+  useEffect(() => {
+    if (loading) {
+      changeLoadingTable(false);
+    }
+    if (data) {
+      console.log(data.articles);
+      changeDataTable(data.articles);
+    }
+  }, [data, loading]);
+
   createTheme("solarized", {
     text: {
       primary: "#eee",
       secondary: "#2aa198",
     },
     background: {
-      default: "#293241",
+      default: "#295241",
     },
     context: {
       background: "#cb4b16",
@@ -84,13 +109,13 @@ const ArticleList: React.FC<IProps> = (props) => {
     },
   });
 
-  const checkIfDisplayed = (id: number): boolean => {
+  const checkIfDisplayed = (id: string): boolean => {
     const articlesId = [];
 
     for (let i = 0; i < props.articles.length; i++) {
-      articlesId[i] = props.articles[i].id;
+      articlesId[i] = props.articles[i]._id;
     }
-    return articlesId.every((xId: number) => xId !== id);
+    return articlesId.every((arrayId: string) => arrayId !== id);
   };
 
   return (
@@ -98,20 +123,20 @@ const ArticleList: React.FC<IProps> = (props) => {
       <DataTable
         title="Articles / Post"
         columns={columns}
-        data={data}
+        data={dataTable}
         responsive={true}
         pagination={true}
         highlightOnHover={true}
         striped={true}
         pointerOnHover={true}
-        progressPending={undefined}
+        progressPending={loadingTable}
         theme="solarized"
-        onRowClicked={(e) => {
+        onRowClicked={(e: IAction) => {
           if (props.articles.length === 0) {
             props.addArticleRedux(e);
             notifySuccess("Done", "Article/Post displayed", 1500);
           } else {
-            if (checkIfDisplayed(e.id)) {
+            if (checkIfDisplayed(e._id)) {
               props.addArticleRedux(e);
               notifySuccess("Done", "Article/Post displayed", 1500);
             } else {

@@ -1,6 +1,9 @@
 interface IAppStateMongo {
   articles: {
-    id: number;
+    _id: string;
+    name: string;
+    lastName: string;
+    gender: string;
     title: string;
     description: string;
   }[];
@@ -9,11 +12,11 @@ interface IAppStateMongo {
 
 interface IAction {
   type: string;
-  id: number;
-  title: string;
-  description: string;
   payload: {
-    id: number;
+    _id: string;
+    name: string;
+    lastName: string;
+    gender: string;
     title: string;
     description: string;
   };

@@ -1,9 +1,9 @@
 import React from "react";
 
-//Components
+// Components
 import CirclePost from "../CirclePost/CirclePost";
 
-//Style
+// Style
 import "./metricsPage.scss";
 
 const MetricsPage: React.FC = () => {

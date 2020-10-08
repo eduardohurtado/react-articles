@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-//Global state REDUX
+// Global state REDUX
 import { connect } from "react-redux";
 
-//Components
+// Components
 import ArticlePost from "../ArticlePost/ArticlePost";
 
-//Style
+// Style
 import "./showArticles.scss";
 
 interface IProps {
   articles: {
-    id: number;
+    _id: string;
     title: string;
     description: string;
   }[];
@@ -20,7 +20,7 @@ interface IProps {
 const ShowArticles: React.FC<IProps> = (props) => {
   const [articlesRedux, updateArticlesRedux] = useState([
     {
-      id: -1,
+      _id: "",
       title: "",
       description: "",
     },
@@ -33,9 +33,9 @@ const ShowArticles: React.FC<IProps> = (props) => {
   return (
     <>
       {articlesRedux.map((e) => (
-        <div className="articleShowSA" key={e.id}>
-          <div className="articlePostShow" key={e.id}>
-            <ArticlePost key={e.id} payload={e} />
+        <div className="articleShowSA" key={e._id}>
+          <div className="articlePostShow" key={e._id}>
+            <ArticlePost key={e._id} payload={e} />
           </div>
         </div>
       ))}
