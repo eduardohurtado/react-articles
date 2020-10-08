@@ -4,7 +4,7 @@
   "description": "## Available Scripts",
   "main": "./src/index.tsx",
   "scripts": {
-    "start": "cd backend && npm start",
+    "start": "node backend/graphql/index.js",
     "dev": "cd react-articles-backend && npm run dev",
     "devw": "webpack-dev-server",
     "build": "webpack",
