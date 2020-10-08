@@ -1,6 +1,6 @@
 import React from "react";
 
-//Style
+// Style
 import "./aboutPage.scss";
 
 const AboutPage: React.FC = () => {

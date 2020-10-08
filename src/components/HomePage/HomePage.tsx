@@ -1,18 +1,18 @@
 import React from "react";
 
-//Global state REDUX
+// Global state REDUX
 import { connect } from "react-redux";
 
-//Components
+// Components
 import ArticleForm from "../ArticleForm/ArticleForm";
 import ArticleList from "../ArticleList/ArticleList";
 import ShowArticles from "../ShowArticles/ShowArticles";
 import Footer from "../Footer/Footer";
 
-//Loading
+// Loading
 import ReactLoading from "react-loading";
 
-//Style
+// Style
 import "./homePage.scss";
 
 interface IProps {

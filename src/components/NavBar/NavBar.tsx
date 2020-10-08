@@ -1,14 +1,14 @@
 import React, { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
-//Text scramble
+// Text scramble
 import TextScramble from "@twistezo/react-text-scramble";
 
-//Icon
+// Icon
 import { SiReact } from "react-icons/si";
 import { VscBook } from "react-icons/vsc";
 
-//Style
+// Style
 import "./navBar.scss";
 
 const NavBar: React.FC = () => {

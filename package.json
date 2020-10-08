@@ -4,9 +4,12 @@
   "description": "## Available Scripts",
   "main": "./src/index.tsx",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "cd react-articles-backend && npm start",
+    "dev": "cd react-articles-backend && npm run dev",
+    "devw": "webpack-dev-server",
     "build": "webpack",
-    "clean": "rimraf node_modules build"
+    "clean": "rimraf node_modules build",
+    "postinstall": "cd react-articles-backend && npm i"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
+    "@apollo/client": "^3.2.2",
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -49,6 +53,7 @@
     "eslint": "^7.10.0",
     "eslint-plugin-react": "^7.21.2",
     "file-loader": "^6.1.0",
+    "graphql": "^15.3.0",
     "html-webpack-plugin": "^4.5.0",
     "image-webpack-loader": "^7.0.1",
     "node-sass": "^4.14.1",

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-//Icon
+// Icon
 import { ImCheckboxChecked } from "react-icons/im";
 
-//Notification
+// Notification
 import { notifyDanger } from "../Notification/Notification";
 
-//Style
+// Style
 import "./articleForm.scss";
 
 const ArticleForm: React.FC = () => {
