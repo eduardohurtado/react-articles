@@ -115,7 +115,11 @@ const ArticleList: React.FC<IProps> = (props) => {
               props.addArticleRedux(e);
               notifySuccess("Done", "Article/Post displayed", 1500);
             } else {
-              notifyDanger("ERROR", "The article is already displayed", 3000);
+              notifyDanger(
+                "ERROR",
+                "The article/post is already displayed",
+                3000
+              );
             }
           }
         }}

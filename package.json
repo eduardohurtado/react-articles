@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "clean": "rimraf node_modules build"
+    "clean": "rimraf node_modules build",
+    "postinstall": "cd react-articles-backend && npm i"
   },
   "repository": {
     "type": "git",
