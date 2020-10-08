@@ -4,12 +4,12 @@
   "description": "## Available Scripts",
   "main": "./src/index.tsx",
   "scripts": {
-    "start": "cd react-articles-backend && npm start",
+    "start": "cd backend && npm start",
     "dev": "cd react-articles-backend && npm run dev",
     "devw": "webpack-dev-server",
     "build": "webpack",
     "clean": "rimraf node_modules build",
-    "submodule": "cd react-articles-backend && npm i"
+    "postinstall": "cd backend && npm i"
   },
   "repository": {
     "type": "git",
