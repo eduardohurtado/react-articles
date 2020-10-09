@@ -11,9 +11,6 @@ import { Dispatch } from "redux";
 // Notification
 import { notifySuccess, notifyDanger } from "../Notification/Notification";
 
-// Styles
-import "./articleTable.scss";
-
 // Queries/Mutations
 const GET_ARTICLES = gql`
   query {
@@ -33,17 +30,19 @@ const columns = [
     name: "Title",
     selector: "title",
     sortable: true,
+    width: "130px",
   },
   {
     name: "Name",
     selector: "name",
     sortable: true,
+    width: "150px",
   },
   {
     name: "Description",
     selector: "description",
     sortable: true,
-    // right: true,
+    width: "250px",
   },
 ];
 
