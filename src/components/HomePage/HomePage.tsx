@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 // Components
 import ArticleForm from "../ArticleForm/ArticleForm";
-import ArticleList from "../ArticleList/ArticleList";
+import ArticleTable from "../ArticleTable/ArticleTable";
 import ShowArticles from "../ShowArticles/ShowArticles";
 import Footer from "../Footer/Footer";
 
@@ -28,7 +28,7 @@ const HomePage: React.FC<IProps> = (props) => {
           <ArticleForm />
         </div>
         <div className="containerHPArticle">
-          <ArticleList />
+          <ArticleTable />
         </div>
         <div className="lineTop"></div>
         <div className="containerHPShow">

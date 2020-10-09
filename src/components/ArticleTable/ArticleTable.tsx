@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
 // GraphQL
-import { useQuery, gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 // Global state REDUX
 import { connect } from "react-redux";
@@ -12,7 +12,7 @@ import { Dispatch } from "redux";
 import { notifySuccess, notifyDanger } from "../Notification/Notification";
 
 // Styles
-import "./articleList.scss";
+import "./articleTable.scss";
 
 // Queries/Mutations
 const GET_ARTICLES = gql`
@@ -68,9 +68,11 @@ interface IAction {
   description: string;
 }
 
-const ArticleList: React.FC<IProps> = (props) => {
+const ArticleTable: React.FC<IProps> = (props) => {
+  // Local state
   const [loadingTable, changeLoadingTable] = useState(true);
   const [dataTable, changeDataTable] = useState([]);
+  // GraphQL
   const { loading, error, data } = useQuery(GET_ARTICLES);
 
   if (error) {
@@ -80,10 +82,13 @@ const ArticleList: React.FC<IProps> = (props) => {
   useEffect(() => {
     if (loading) {
       changeLoadingTable(false);
+    } else {
+      changeLoadingTable(true);
     }
     if (data) {
       console.log(data.articles);
       changeDataTable(data.articles);
+      changeLoadingTable(false);
     }
   }, [data, loading]);
 
@@ -166,4 +171,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleList);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleTable);

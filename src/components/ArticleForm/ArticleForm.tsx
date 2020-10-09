@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+// GraphQL
+import { gql, useMutation } from "@apollo/client";
+
 // Icon
 import { ImCheckboxChecked } from "react-icons/im";
 
@@ -9,7 +12,17 @@ import { notifyDanger } from "../Notification/Notification";
 // Style
 import "./articleForm.scss";
 
+//Queries/Mutations
+const ADD_ARTICLE = gql`
+  mutation createArticle($input: ArticleInput) {
+    createArticle(input: $input) {
+      _id
+    }
+  }
+`;
+
 const ArticleForm: React.FC = () => {
+  // Local state
   const [iconAuthor, updateIAuthor] = useState(false);
   const [iconTitle, updateITitle] = useState(false);
   const [iconCompose, updateICompose] = useState(false);
@@ -18,6 +31,8 @@ const ArticleForm: React.FC = () => {
   const [lastnameValue, updateLast] = useState("");
   const [titleValue, updateTitle] = useState("");
   const [composeValue, updateCompose] = useState("");
+  // GraphQL
+  const [createArticle, { data }] = useMutation(ADD_ARTICLE);
 
   const iconDefault = {
     color: "#555",
@@ -28,24 +43,39 @@ const ArticleForm: React.FC = () => {
 
   onsubmit = (e) => {
     e.preventDefault();
+    let genderForm = "";
 
     if (iconAuthor === false || iconTitle === false || iconCompose === false) {
       notifyDanger("ERROR", "Please fill all form fields", 3000);
     } else {
-      console.log(nameValue);
-      console.log(lastnameValue);
       const radioSelected = (document.getElementsByName(
         "b-userInfo"
       ) as unknown) as HTMLInputElement[];
       for (let i = 0; i < radioSelected.length; i++) {
         if (radioSelected[i].checked) {
-          console.log(radioSelected[i].value);
+          genderForm = radioSelected[i].value;
         }
       }
-      console.log(titleValue);
-      console.log(composeValue);
+
+      createArticle({
+        variables: {
+          input: {
+            name: nameValue,
+            lastName: lastnameValue,
+            gender: genderForm,
+            title: titleValue,
+            description: composeValue,
+          },
+        },
+      });
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      console.info(data);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (nameValue === "" || lastnameValue === "") {
