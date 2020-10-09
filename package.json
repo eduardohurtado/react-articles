@@ -9,7 +9,7 @@
     "devw": "webpack-dev-server",
     "build": "webpack",
     "clean": "rimraf node_modules build",
-    "submodule": "cd react-articles-backend && npm i"
+    "postinstall": "cd react-articles-backend && npm i"
   },
   "repository": {
     "type": "git",
