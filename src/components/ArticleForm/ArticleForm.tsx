@@ -32,7 +32,7 @@ const ArticleForm: React.FC = () => {
   const [titleValue, updateTitle] = useState("");
   const [composeValue, updateCompose] = useState("");
   // GraphQL
-  const [createArticle, { data }] = useMutation(ADD_ARTICLE);
+  const [createArticle, { error, data }] = useMutation(ADD_ARTICLE);
 
   const iconDefault = {
     color: "#555",
@@ -75,7 +75,10 @@ const ArticleForm: React.FC = () => {
     if (data) {
       console.info(data);
     }
-  }, [data]);
+    if (error) {
+      console.error(error);
+    }
+  }, [data, error]);
 
   useEffect(() => {
     if (nameValue === "" || lastnameValue === "") {
