@@ -68,6 +68,11 @@ const ArticleForm: React.FC = () => {
           },
         },
       });
+
+      updateName("");
+      updateLast("");
+      updateTitle("");
+      updateCompose("");
     }
   };
 
