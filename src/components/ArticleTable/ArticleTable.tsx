@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
 // GraphQL
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useSubscription } from "@apollo/client";
 
 // Global state REDUX
 import { connect } from "react-redux";
@@ -15,6 +15,19 @@ import { notifySuccess, notifyDanger } from "../Notification/Notification";
 const GET_ARTICLES = gql`
   query {
     articles {
+      _id
+      name
+      lastName
+      gender
+      title
+      description
+    }
+  }
+`;
+
+const SUBSCRIBE_ARTICLES = gql`
+  subscription {
+    articleSent {
       _id
       name
       lastName
@@ -73,10 +86,15 @@ const ArticleTable: React.FC<IProps> = (props) => {
   const [dataTable, changeDataTable] = useState([]);
   // GraphQL
   const { loading, error, data } = useQuery(GET_ARTICLES);
+  const { error: errorS, data: dataS } = useSubscription(SUBSCRIBE_ARTICLES);
 
-  if (error) {
-    console.error(error);
-  }
+  useEffect(() => {
+    if (error) {
+      console.error("GET: Table ERROR.", error);
+    } else if (errorS) {
+      console.error("SUBSCRIBE: Table ERROR.", errorS);
+    }
+  }, [error, errorS]);
 
   useEffect(() => {
     if (loading) {
@@ -85,7 +103,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
       changeLoadingTable(true);
     }
     if (data) {
-      console.log(data.articles);
+      console.log(data);
       changeDataTable(data.articles);
       changeLoadingTable(false);
     }
