@@ -11,7 +11,7 @@ import { Dispatch } from "redux";
 // Notification
 import { notifySuccess, notifyDanger } from "../Notification/Notification";
 
-// Queries/Mutations
+// Queries/Mutations/Subscriptions
 const GET_ARTICLES = gql`
   query {
     articles {
@@ -24,7 +24,6 @@ const GET_ARTICLES = gql`
     }
   }
 `;
-
 const SUBSCRIBE_ARTICLES = gql`
   subscription {
     articleSent {
@@ -68,10 +67,10 @@ interface IProps {
     title: string;
     description: string;
   }[];
-  addArticleRedux: (payload: IAction) => void;
+  addArticleRedux: (payload: ITable) => void;
 }
 
-interface IAction {
+interface ITable {
   _id: string;
   name: string;
   lastName: string;
@@ -82,8 +81,17 @@ interface IAction {
 
 const ArticleTable: React.FC<IProps> = (props) => {
   // Local state
-  const [loadingTable, changeLoadingTable] = useState(true);
-  const [dataTable, changeDataTable] = useState([]);
+  const [loadingTable, changeLoadingTable] = useState(false); //true!
+  const [dataTable, changeDataTable] = useState([
+    {
+      _id: "",
+      name: "lolol",
+      lastName: "",
+      gender: "",
+      title: "titleLOL",
+      description: "descriptionLOL",
+    },
+  ]);
   // GraphQL
   const { loading, error, data } = useQuery(GET_ARTICLES);
   const { error: errorS, data: dataS } = useSubscription(SUBSCRIBE_ARTICLES);
@@ -103,11 +111,29 @@ const ArticleTable: React.FC<IProps> = (props) => {
       changeLoadingTable(true);
     }
     if (data) {
-      console.log(data);
-      changeDataTable(data.articles);
+      console.log("Data from MongoDB:", data);
+      // changeDataTable(data.articles);
       changeLoadingTable(false);
     }
   }, [data, loading]);
+
+  useEffect(() => {
+    if (dataS) {
+      console.warn("Article added to MongoDB:", dataS);
+      // const currentDataTable = dataTable;
+      const subscriptionObject: ITable = {
+        _id: dataS.articleSent._id,
+        name: dataS.articleSent.name,
+        lastName: dataS.articleSent.lastName,
+        gender: dataS.articleSent.gender,
+        title: dataS.articleSent.title,
+        description: dataS.articleSent.description,
+      };
+      // currentDataTable.push(subscriptionObject as never);
+      changeDataTable([...dataTable, subscriptionObject]);
+      console.warn("Table after changes:", dataTable);
+    }
+  }, [dataS]);
 
   createTheme("solarized", {
     text: {
@@ -153,7 +179,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
         pointerOnHover={true}
         progressPending={loadingTable}
         theme="solarized"
-        onRowClicked={(e: IAction) => {
+        onRowClicked={(e: ITable) => {
           if (props.articles.length === 0) {
             props.addArticleRedux(e);
             notifySuccess("Done", "Article/Post displayed", 1500);
@@ -183,7 +209,7 @@ const mapStateToProps = (state: IProps) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    addArticleRedux: (payload: IAction) =>
+    addArticleRedux: (payload: ITable) =>
       dispatch({ type: "ADD_ARTICLE", payload }),
   };
 };
