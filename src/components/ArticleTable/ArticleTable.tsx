@@ -9,7 +9,11 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 // Notification
-import { notifySuccess, notifyDanger } from "../Notification/Notification";
+import {
+  notifySuccess,
+  notifyWarning,
+  notifyDanger,
+} from "../Notification/Notification";
 
 // Queries/Mutations/Subscriptions
 const GET_ARTICLES = gql`
@@ -82,18 +86,10 @@ interface ITable {
 const ArticleTable: React.FC<IProps> = (props) => {
   // Local state
   const [loadingTable, changeLoadingTable] = useState(true);
-  const [dataTable, changeDataTable] = useState([
-    {
-      _id: "",
-      name: "lolol",
-      lastName: "",
-      gender: "",
-      title: "titleLOL",
-      description: "descriptionLOL",
-    },
-  ]);
+  const [dataTable, changeDataTable] = useState([]);
+
   // GraphQL
-  const { loading, error, data } = useQuery(GET_ARTICLES);
+  const { error, data } = useQuery(GET_ARTICLES);
   const { error: errorS, data: dataS } = useSubscription(SUBSCRIBE_ARTICLES);
 
   useEffect(() => {
@@ -105,17 +101,18 @@ const ArticleTable: React.FC<IProps> = (props) => {
   }, [error, errorS]);
 
   useEffect(() => {
-    if (loading) {
-      changeLoadingTable(false);
-    } else {
-      changeLoadingTable(true);
-    }
     if (data) {
-      console.log("Data from MongoDB:", data);
-      changeDataTable(data.articles);
-      changeLoadingTable(false);
+      if (data.articles.length === 0) {
+        console.warn("There's not data on MongoDB");
+        notifyWarning("Warning", "There's not data on MongoDB.", 5000);
+        changeLoadingTable(false);
+      } else {
+        console.log("Data from MongoDB:", data);
+        changeDataTable(data.articles);
+        changeLoadingTable(false);
+      }
     }
-  }, [data, loading]);
+  }, [data]);
 
   useEffect(() => {
     if (dataS) {
@@ -127,7 +124,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
         title: dataS.articleSent.title,
         description: dataS.articleSent.description,
       };
-      changeDataTable([...dataTable, subscriptionObject]);
+      changeDataTable([...dataTable, subscriptionObject as never]);
     }
   }, [dataS]);
 

@@ -66,6 +66,68 @@ export function notifySuccess(
   });
 }
 
+export function notifyWarning(
+  title: string,
+  message: string,
+  duration: number
+): void {
+  const divStyle: CSSProperties = {
+    background: "#CA992C",
+    boxSizing: "border-box",
+    width: "100%",
+    display: "flex",
+    color: "white",
+  };
+
+  const divSide: CSSProperties = {
+    height: "100%",
+    width: "10px",
+    background: "#86592C",
+  };
+
+  const iconStyle: CSSProperties = {
+    margin: "30px 20px 0 10px",
+  };
+
+  const titleStyle: CSSProperties = {
+    fontSize: "18px",
+  };
+
+  const customNotification = (
+    <div style={divStyle}>
+      <div style={divSide}></div>
+      <div style={iconStyle}>
+        <img
+          alt="Check"
+          src="https://live.staticflickr.com/65535/50494530846_a8d0249d17_o.png"
+          width="32px"
+          height="32px"
+        />
+      </div>
+      <div>
+        <p style={titleStyle}>
+          {" "}
+          <b>{title}</b>{" "}
+        </p>
+        <p> {message} </p>
+      </div>
+    </div>
+  );
+
+  store.addNotification({
+    width: 330,
+    insert: "top",
+    container: "top-center",
+    content: customNotification,
+    animationIn: ["animated", "flipInX"],
+    animationOut: ["animated", "fadeOut"],
+    dismiss: {
+      duration: duration,
+      pauseOnHover: true,
+    },
+  });
+}
+
 export function notifyDanger(
   title: string,
   message: string,
