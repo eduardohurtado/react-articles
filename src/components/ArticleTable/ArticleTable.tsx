@@ -41,24 +41,24 @@ const SUBSCRIBE_ARTICLES = gql`
   }
 `;
 
+//Theme
+import "./articleTable.scss";
+
 const columns = [
   {
     name: "Title",
     selector: "title",
     sortable: true,
-    width: "130px",
   },
   {
     name: "Name",
     selector: "name",
     sortable: true,
-    width: "150px",
   },
   {
     name: "Description",
     selector: "description",
     sortable: true,
-    width: "250px",
   },
 ];
 
@@ -131,7 +131,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
   createTheme("solarized", {
     text: {
       primary: "#eee",
-      secondary: "#2aa198",
+      secondary: "#eee",
     },
     background: {
       default: "#295241",
@@ -159,6 +159,26 @@ const ArticleTable: React.FC<IProps> = (props) => {
     return articlesId.every((arrayId: string) => arrayId !== id);
   };
 
+  const handleRowClicked = (e: ITable) => {
+    if (props.articles.length === 0) {
+      props.addArticleRedux(e);
+      notifySuccess("Done", "Article/Post displayed", 1500);
+    } else {
+      if (checkIfDisplayed(e._id)) {
+        props.addArticleRedux(e);
+        notifySuccess("Done", "Article/Post displayed", 1500);
+      } else {
+        notifyDanger("ERROR", "The article/post is already displayed", 3000);
+      }
+    }
+  };
+
+  const handleRowSelected = (e: unknown) => {
+    console.log(e);
+  };
+
+  const buttonDelete = <button className="button">Delete</button>;
+
   return (
     <div className="articleListContainer">
       <DataTable
@@ -169,26 +189,14 @@ const ArticleTable: React.FC<IProps> = (props) => {
         pagination={true}
         highlightOnHover={true}
         striped={true}
+        selectableRows={true}
+        selectableRowsVisibleOnly={true}
         pointerOnHover={true}
         progressPending={loadingTable}
         theme="solarized"
-        onRowClicked={(e: ITable) => {
-          if (props.articles.length === 0) {
-            props.addArticleRedux(e);
-            notifySuccess("Done", "Article/Post displayed", 1500);
-          } else {
-            if (checkIfDisplayed(e._id)) {
-              props.addArticleRedux(e);
-              notifySuccess("Done", "Article/Post displayed", 1500);
-            } else {
-              notifyDanger(
-                "ERROR",
-                "The article/post is already displayed",
-                3000
-              );
-            }
-          }
-        }}
+        onRowClicked={handleRowClicked}
+        onSelectedRowsChange={handleRowSelected}
+        contextActions={buttonDelete}
       />
     </div>
   );
