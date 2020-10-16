@@ -81,7 +81,7 @@ interface ITable {
 
 const ArticleTable: React.FC<IProps> = (props) => {
   // Local state
-  const [loadingTable, changeLoadingTable] = useState(false); //true!
+  const [loadingTable, changeLoadingTable] = useState(true);
   const [dataTable, changeDataTable] = useState([
     {
       _id: "",
@@ -112,15 +112,13 @@ const ArticleTable: React.FC<IProps> = (props) => {
     }
     if (data) {
       console.log("Data from MongoDB:", data);
-      // changeDataTable(data.articles);
+      changeDataTable(data.articles);
       changeLoadingTable(false);
     }
   }, [data, loading]);
 
   useEffect(() => {
     if (dataS) {
-      console.warn("Article added to MongoDB:", dataS);
-      // const currentDataTable = dataTable;
       const subscriptionObject: ITable = {
         _id: dataS.articleSent._id,
         name: dataS.articleSent.name,
@@ -129,9 +127,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
         title: dataS.articleSent.title,
         description: dataS.articleSent.description,
       };
-      // currentDataTable.push(subscriptionObject as never);
       changeDataTable([...dataTable, subscriptionObject]);
-      console.warn("Table after changes:", dataTable);
     }
   }, [dataS]);
 
