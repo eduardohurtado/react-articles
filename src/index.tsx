@@ -20,7 +20,7 @@ const clientS = new SubscriptionClient(GRAPHQL_SUBSCRIPTION_ENDPOINT, {
 const link = new WebSocketLink(clientS);
 const client = new ApolloClient({
   link,
-  uri: "/graphql",
+  uri: "http://localhost:8080/graphql",
   cache: new InMemoryCache(),
 });
 

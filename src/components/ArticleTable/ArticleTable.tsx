@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
 // GraphQL
@@ -41,7 +41,7 @@ const SUBSCRIBE_ARTICLES = gql`
   }
 `;
 
-//Theme
+// Theme
 import "./articleTable.scss";
 
 const columns = [
@@ -83,10 +83,15 @@ interface ITable {
   description: string;
 }
 
+interface ITableActions {
+  title: string;
+}
+
 const ArticleTable: React.FC<IProps> = (props) => {
   // Local state
   const [loadingTable, changeLoadingTable] = useState(true);
   const [dataTable, changeDataTable] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   // GraphQL
   const { error, data } = useQuery(GET_ARTICLES);
@@ -173,11 +178,31 @@ const ArticleTable: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleRowSelected = (e: unknown) => {
-    console.log(e);
-  };
+  const handleRowSelected = useCallback((e) => {
+    setSelectedRows(e.selectedRows);
+  }, []);
 
-  const buttonDelete = <button className="button">Delete</button>;
+  const contextActions = useMemo(() => {
+    const handleDelete = () => {
+      if (
+        window.confirm(
+          `Are you sure you want to delete:\r ${selectedRows.map(
+            (e: ITableActions) => e.title
+          )}?`
+        )
+      ) {
+        console.warn(
+          `Youre deleted:\r ${selectedRows.map((e: ITableActions) => e.title)}`
+        );
+      }
+    };
+
+    return (
+      <button className="button" key="delete" onClick={handleDelete}>
+        Delete
+      </button>
+    );
+  }, [data, selectedRows]);
 
   return (
     <div className="articleListContainer">
@@ -196,7 +221,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
         theme="solarized"
         onRowClicked={handleRowClicked}
         onSelectedRowsChange={handleRowSelected}
-        contextActions={buttonDelete}
+        contextActions={contextActions}
       />
     </div>
   );
