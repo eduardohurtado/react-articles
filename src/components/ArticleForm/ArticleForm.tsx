@@ -3,16 +3,19 @@ import React, { useState, useEffect } from "react";
 // GraphQL
 import { gql, useMutation } from "@apollo/client";
 
+// Global state REDUX
+import { connect } from "react-redux";
+
 // Icon
 import { ImCheckboxChecked } from "react-icons/im";
 
 // Notification
-import { notifyDanger } from "../Notification/Notification";
+import { notifyDanger, notifyWarning } from "../Notification/Notification";
 
 // Style
 import "./articleForm.scss";
 
-//Queries/Mutations
+// Mutations
 const ADD_ARTICLE = gql`
   mutation createArticle($input: ArticleInput) {
     createArticle(input: $input) {
@@ -21,7 +24,11 @@ const ADD_ARTICLE = gql`
   }
 `;
 
-const ArticleForm: React.FC = () => {
+interface IProps {
+  isSelecting: boolean;
+}
+
+const ArticleForm: React.FC<IProps> = (props) => {
   // Local state
   const [iconAuthor, updateIAuthor] = useState(false);
   const [iconTitle, updateITitle] = useState(false);
@@ -43,36 +50,44 @@ const ArticleForm: React.FC = () => {
 
   onsubmit = (e) => {
     e.preventDefault();
-    let genderForm = "";
 
-    if (iconAuthor === false || iconTitle === false || iconCompose === false) {
-      notifyDanger("ERROR", "Please fill all form fields", 3000);
-    } else {
-      const radioSelected = (document.getElementsByName(
-        "b-userInfo"
-      ) as unknown) as HTMLInputElement[];
-      for (let i = 0; i < radioSelected.length; i++) {
-        if (radioSelected[i].checked) {
-          genderForm = radioSelected[i].value;
+    if (!props.isSelecting) {
+      let genderForm = "";
+      if (
+        iconAuthor === false ||
+        iconTitle === false ||
+        iconCompose === false
+      ) {
+        notifyDanger("ERROR", "Please fill all form fields", 3000);
+      } else {
+        const radioSelected = (document.getElementsByName(
+          "b-userInfo"
+        ) as unknown) as HTMLInputElement[];
+        for (let i = 0; i < radioSelected.length; i++) {
+          if (radioSelected[i].checked) {
+            genderForm = radioSelected[i].value;
+          }
         }
-      }
 
-      createArticle({
-        variables: {
-          input: {
-            name: nameValue,
-            lastName: lastnameValue,
-            gender: genderForm,
-            title: titleValue,
-            description: composeValue,
+        createArticle({
+          variables: {
+            input: {
+              name: nameValue,
+              lastName: lastnameValue,
+              gender: genderForm,
+              title: titleValue,
+              description: composeValue,
+            },
           },
-        },
-      });
+        });
 
-      updateName("");
-      updateLast("");
-      updateTitle("");
-      updateCompose("");
+        updateName("");
+        updateLast("");
+        updateTitle("");
+        updateCompose("");
+      }
+    } else {
+      notifyWarning("Warning", "You can't submit while select articles", 5000);
     }
   };
 
@@ -254,7 +269,7 @@ const ArticleForm: React.FC = () => {
                 placeholder="Compose your Article/Post"
                 cols={33}
                 rows={10}
-                maxLength={400}
+                maxLength={1000}
                 style={{ resize: "none" }}
                 value={composeValue}
                 onChange={(e) => {
@@ -275,4 +290,10 @@ const ArticleForm: React.FC = () => {
   );
 };
 
-export default ArticleForm;
+const mapStateToProps = (state: IProps) => {
+  return {
+    isSelecting: state.isSelecting,
+  };
+};
+
+export default connect(mapStateToProps)(ArticleForm);

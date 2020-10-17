@@ -7,7 +7,8 @@ interface IAppStateMongo {
     title: string;
     description: string;
   }[];
-  isLoading: boolean;
+  isLoading?: boolean;
+  isSelecting?: boolean;
 }
 
 interface IAction {
@@ -19,12 +20,14 @@ interface IAction {
     gender: string;
     title: string;
     description: string;
+    isSelecting: boolean;
   };
 }
 
 const initialStateMongo: IAppStateMongo = {
   articles: [],
   isLoading: true,
+  isSelecting: false,
 };
 
 const reducer = (
@@ -39,6 +42,18 @@ const reducer = (
       articles: [...actualState],
       isLoading: false,
     };
+  } else if (action.type === "TABLE_SELECTING") {
+    if (action.payload.isSelecting) {
+      return {
+        ...state,
+        isSelecting: true,
+      };
+    } else {
+      return {
+        ...state,
+        isSelecting: false,
+      };
+    }
   }
 
   return state;

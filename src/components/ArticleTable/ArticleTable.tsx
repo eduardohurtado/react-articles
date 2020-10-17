@@ -15,7 +15,7 @@ import {
   notifyDanger,
 } from "../Notification/Notification";
 
-// Queries/Mutations/Subscriptions
+// Queries/Subscriptions
 const GET_ARTICLES = gql`
   query {
     articles {
@@ -58,7 +58,9 @@ const columns = [
   {
     name: "Description",
     selector: "description",
+    width: "95px",
     sortable: true,
+    right: true,
   },
 ];
 
@@ -72,6 +74,7 @@ interface IProps {
     description: string;
   }[];
   addArticleRedux: (payload: ITable) => void;
+  changeSelectingRedux: (payload: ISelecting) => void;
 }
 
 interface ITable {
@@ -85,6 +88,10 @@ interface ITable {
 
 interface ITableActions {
   title: string;
+}
+
+interface ISelecting {
+  isSelecting: boolean;
 }
 
 const ArticleTable: React.FC<IProps> = (props) => {
@@ -180,6 +187,11 @@ const ArticleTable: React.FC<IProps> = (props) => {
 
   const handleRowSelected = useCallback((e) => {
     setSelectedRows(e.selectedRows);
+    if (e.selectedCount > 0) {
+      props.changeSelectingRedux({ isSelecting: true });
+    } else {
+      props.changeSelectingRedux({ isSelecting: false });
+    }
   }, []);
 
   const contextActions = useMemo(() => {
@@ -205,7 +217,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
   }, [data, selectedRows]);
 
   return (
-    <div className="articleListContainer">
+    <div>
       <DataTable
         title="Articles / Post"
         columns={columns}
@@ -237,6 +249,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addArticleRedux: (payload: ITable) =>
       dispatch({ type: "ADD_ARTICLE", payload }),
+
+    changeSelectingRedux: (payload: ISelecting) =>
+      dispatch({ type: "TABLE_SELECTING", payload }),
   };
 };
 
