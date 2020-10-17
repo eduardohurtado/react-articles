@@ -38,6 +38,7 @@ const ArticleForm: React.FC<IProps> = (props) => {
   const [lastnameValue, updateLast] = useState("");
   const [titleValue, updateTitle] = useState("");
   const [composeValue, updateCompose] = useState("");
+
   // GraphQL
   const [createArticle, { error }] = useMutation(ADD_ARTICLE);
 

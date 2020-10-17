@@ -105,6 +105,10 @@ const ArticleTable: React.FC<IProps> = (props) => {
   const { error: errorS, data: dataS } = useSubscription(SUBSCRIBE_ARTICLES);
 
   useEffect(() => {
+    props.changeSelectingRedux({ isSelecting: false });
+  }, []);
+
+  useEffect(() => {
     if (error) {
       console.error("GET: Table ERROR.", error);
     } else if (errorS) {
