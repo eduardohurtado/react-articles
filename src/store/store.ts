@@ -39,6 +39,7 @@ const reducer = (
     actualState.push(action.payload);
 
     return {
+      ...state,
       articles: [...actualState],
       isLoading: false,
     };

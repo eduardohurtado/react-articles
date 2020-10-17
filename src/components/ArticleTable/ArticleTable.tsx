@@ -187,6 +187,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
 
   const handleRowSelected = useCallback((e) => {
     setSelectedRows(e.selectedRows);
+    console.log(e);
     if (e.selectedCount > 0) {
       props.changeSelectingRedux({ isSelecting: true });
     } else {

@@ -15,7 +15,7 @@ import { notifyDanger, notifyWarning } from "../Notification/Notification";
 // Style
 import "./articleForm.scss";
 
-// Mutations
+// Queries/Mutations
 const ADD_ARTICLE = gql`
   mutation createArticle($input: ArticleInput) {
     createArticle(input: $input) {
