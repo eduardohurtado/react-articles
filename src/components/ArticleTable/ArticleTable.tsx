@@ -15,6 +15,9 @@ import {
   notifyDanger,
 } from "../Notification/Notification";
 
+// Theme
+import "./articleTable.scss";
+
 // Queries/Mutations/Subscriptions
 const GET_ARTICLES = gql`
   query {
@@ -47,9 +50,6 @@ const SUBSCRIBE_ARTICLES = gql`
     }
   }
 `;
-
-// Theme
-import "./articleTable.scss";
 
 const columns = [
   {
@@ -102,7 +102,7 @@ interface ISelecting {
 }
 
 const ArticleTable: React.FC<IProps> = (props) => {
-  // Local state
+  // State
   const [loadingTable, changeLoadingTable] = useState(true);
   const [dataTable, changeDataTable] = useState([]);
   const [clearSelectedRows, changeClearSelectedRows] = useState(false);
@@ -132,11 +132,11 @@ const ArticleTable: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     if (error) {
-      console.error("GET: Table ERROR.", error);
+      console.error("GET Table ERROR:", error.message);
     } else if (errorS) {
-      console.error("SUBSCRIBE: Table ERROR.", errorS);
+      console.error("SUBSCRIBE Table ERROR:", errorS.message);
     } else if (errorD) {
-      console.error("DELETE: Table ERROR.", errorD);
+      console.error("DELETE Table ERROR:", errorD.message);
     }
   }, [error, errorS, errorD]);
 

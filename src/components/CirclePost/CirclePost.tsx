@@ -24,13 +24,11 @@ const CirclePost: React.FC<IProps> = (props) => {
     <div className="container" style={postStyle}>
       <div className="content">
         <span>
-          {}
           <b>{props.post.amount}</b>
         </span>
         <br />
         <span>{props.post.title}</span>
         <br />
-
         <GrNotes />
       </div>
     </div>
