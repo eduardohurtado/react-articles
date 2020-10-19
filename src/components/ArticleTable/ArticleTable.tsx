@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import DataTable, { createTheme } from "react-data-table-component";
 
 // GraphQL
-import { gql, useQuery, useSubscription } from "@apollo/client";
+import { gql, useQuery, useMutation, useSubscription } from "@apollo/client";
 
 // Global state REDUX
 import { connect } from "react-redux";
@@ -15,7 +15,7 @@ import {
   notifyDanger,
 } from "../Notification/Notification";
 
-// Queries/Subscriptions
+// Queries/Mutations/Subscriptions
 const GET_ARTICLES = gql`
   query {
     articles {
@@ -25,6 +25,13 @@ const GET_ARTICLES = gql`
       gender
       title
       description
+    }
+  }
+`;
+const DELETE_ARTICLE = gql`
+  mutation deleteArticle($_id: ID) {
+    deleteArticle(_id: $_id) {
+      _id
     }
   }
 `;
@@ -98,10 +105,19 @@ const ArticleTable: React.FC<IProps> = (props) => {
   // Local state
   const [loadingTable, changeLoadingTable] = useState(true);
   const [dataTable, changeDataTable] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [clearSelectedRows, changeClearSelectedRows] = useState(false);
+  const [selectedRows, setSelectedRows] = useState([
+    {
+      _id: "",
+      title: "",
+    },
+  ]);
 
   // GraphQL
-  const { error, data } = useQuery(GET_ARTICLES);
+  const { error, data, refetch } = useQuery(GET_ARTICLES);
+  const [deleteArticle, { error: errorD, data: dataD }] = useMutation(
+    DELETE_ARTICLE
+  );
   const { error: errorS, data: dataS } = useSubscription(SUBSCRIBE_ARTICLES);
 
   useEffect(() => {
@@ -109,21 +125,28 @@ const ArticleTable: React.FC<IProps> = (props) => {
   }, []);
 
   useEffect(() => {
+    if (dataD) {
+      refetch();
+    }
+  }, [dataD]);
+
+  useEffect(() => {
     if (error) {
       console.error("GET: Table ERROR.", error);
     } else if (errorS) {
       console.error("SUBSCRIBE: Table ERROR.", errorS);
+    } else if (errorD) {
+      console.error("DELETE: Table ERROR.", errorD);
     }
-  }, [error, errorS]);
+  }, [error, errorS, errorD]);
 
   useEffect(() => {
     if (data) {
       if (data.articles.length === 0) {
-        console.warn("There's not data on MongoDB");
         notifyWarning("Warning", "There's not data on MongoDB.", 5000);
         changeLoadingTable(false);
+        changeDataTable(data.articles);
       } else {
-        console.log("Data from MongoDB:", data);
         changeDataTable(data.articles);
         changeLoadingTable(false);
       }
@@ -132,15 +155,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
 
   useEffect(() => {
     if (dataS) {
-      const subscriptionObject: ITable = {
-        _id: dataS.articleSent._id,
-        name: dataS.articleSent.name,
-        lastName: dataS.articleSent.lastName,
-        gender: dataS.articleSent.gender,
-        title: dataS.articleSent.title,
-        description: dataS.articleSent.description,
-      };
-      changeDataTable([...dataTable, subscriptionObject as never]);
+      refetch();
     }
   }, [dataS]);
 
@@ -191,7 +206,6 @@ const ArticleTable: React.FC<IProps> = (props) => {
 
   const handleRowSelected = useCallback((e) => {
     setSelectedRows(e.selectedRows);
-    console.log(e);
     if (e.selectedCount > 0) {
       props.changeSelectingRedux({ isSelecting: true });
     } else {
@@ -208,9 +222,20 @@ const ArticleTable: React.FC<IProps> = (props) => {
           )}?`
         )
       ) {
-        console.warn(
-          `Youre deleted:\r ${selectedRows.map((e: ITableActions) => e.title)}`
-        );
+        const idCatch = [];
+        for (let i = 0; i < selectedRows.length; i++) {
+          idCatch[i] = selectedRows[i]._id;
+        }
+
+        for (let i = 0; i < idCatch.length; i++) {
+          deleteArticle({
+            variables: {
+              _id: idCatch[i],
+            },
+          });
+        }
+
+        changeClearSelectedRows(!clearSelectedRows);
       }
     };
 
@@ -236,6 +261,7 @@ const ArticleTable: React.FC<IProps> = (props) => {
         pointerOnHover={true}
         progressPending={loadingTable}
         theme="solarized"
+        clearSelectedRows={clearSelectedRows}
         onRowClicked={handleRowClicked}
         onSelectedRowsChange={handleRowSelected}
         contextActions={contextActions}
