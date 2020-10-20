@@ -10,7 +10,11 @@ import { connect } from "react-redux";
 import { ImCheckboxChecked } from "react-icons/im";
 
 // Notification
-import { notifyDanger, notifyWarning } from "../Notification/Notification";
+import {
+  notifySuccess,
+  notifyDanger,
+  notifyWarning,
+} from "../Notification/Notification";
 
 // Style
 import "./articleForm.scss";
@@ -40,7 +44,7 @@ const ArticleForm: React.FC<IProps> = (props) => {
   const [composeValue, updateCompose] = useState("");
 
   // GraphQL
-  const [createArticle, { error }] = useMutation(ADD_ARTICLE);
+  const [createArticle, { error, data }] = useMutation(ADD_ARTICLE);
 
   const iconDefault = {
     color: "#555",
@@ -97,6 +101,12 @@ const ArticleForm: React.FC<IProps> = (props) => {
       console.error("ERROR on Article submit:", error);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (data) {
+      notifySuccess("Done!", "Article / Post saved on MongoDB", 3000);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (nameValue === "" || lastnameValue === "") {

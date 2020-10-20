@@ -27,6 +27,7 @@ module.exports = {
     },
   },
   mode: "production",
+  // mode: "development",
   performance: { hints: false },
   output: {
     path: path.resolve(__dirname, "build"),
