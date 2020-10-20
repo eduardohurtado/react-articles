@@ -1,1 +1,3 @@
-react-articles-backend/
+react-articles-backend/*
+node_modules/*
+build/*

@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 
 // Components
 import CirclePost from "../CirclePost/CirclePost";
+import GenderChart from "../GenderChart/GenderChart";
 
 // Style
 import "./metricsPage.scss";
@@ -20,21 +21,18 @@ const GET_ARTICLES = gql`
 
 const MetricsPage: React.FC = () => {
   // State
-  const [showArticleCircle, changeShowArticleCircle] = useState(true);
   const [articleCircle, changeArticleCircle] = useState({
     amount: 0,
     title: "Articles",
     icon: "",
     color: "#6e5773",
   });
-  const [showPostCircle, changeShowPostCircle] = useState(true);
   const [postCircle, changePostCircle] = useState({
     amount: 0,
     title: "Posts",
-    icon: "#8675a9",
-    color: "",
+    icon: "",
+    color: "#8675a9",
   });
-  const [showTotalCircle, changeShowTotalCircle] = useState(true);
   const [totalCircle, changeTotalCircle] = useState({
     amount: 0,
     title: "Total",
@@ -68,7 +66,6 @@ const MetricsPage: React.FC = () => {
           icon: "Article",
           color: "#8675a9",
         });
-        changeShowPostCircle(true);
 
         articleNumber = data.articles.length - postNumber;
 
@@ -78,7 +75,6 @@ const MetricsPage: React.FC = () => {
           icon: "Article",
           color: "#6e5773",
         });
-        changeShowArticleCircle(true);
 
         changeTotalCircle({
           amount: data.articles.length,
@@ -86,7 +82,6 @@ const MetricsPage: React.FC = () => {
           icon: "Article",
           color: "#6886c5",
         });
-        changeShowTotalCircle(true);
       }
     }
   }, [data]);
@@ -94,10 +89,11 @@ const MetricsPage: React.FC = () => {
   return (
     <div className="metricsPage">
       <div className="rowWrap">
-        {showArticleCircle && <CirclePost post={articleCircle} />}
-        {showPostCircle && <CirclePost post={postCircle} />}
-        {showTotalCircle && <CirclePost post={totalCircle} />}
+        <CirclePost post={articleCircle} />
+        <CirclePost post={postCircle} />
+        <CirclePost post={totalCircle} />
       </div>
+      <GenderChart />
     </div>
   );
 };
