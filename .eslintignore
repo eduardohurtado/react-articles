@@ -1,3 +1,4 @@
 react-articles-backend/*
 node_modules/*
 build/*
+webpack.config.js

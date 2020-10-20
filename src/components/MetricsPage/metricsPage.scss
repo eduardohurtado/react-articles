@@ -2,11 +2,29 @@
   grid-column: 1 / span 3;
   grid-row: 3 / span 3;
   overflow: auto;
-  padding: 20px;
-  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  background: #30475e;
 
   .rowWrap {
+    margin-top: 20px;
     display: flex;
-    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .lineDivide {
+    margin: auto;
+    width: 95%;
+    height: 2px;
+    margin-top: 20px;
+    border-top: 5px groove #169873;
+  }
+
+  .genderChartContainer {
+    margin: 20px auto;
+    width: 90%;
+    height: auto;
+    background: #dddddd;
+    border-radius: 5px;
   }
 }

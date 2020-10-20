@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 
 // Components
-import CirclePost from "../CirclePost/CirclePost";
-import GenderChart from "../GenderChart/GenderChart";
+import CirclePost from "./CirclePost/CirclePost";
+import GenderBarChart from "./GenderBarChart/GenderBarChart";
 
 // Style
 import "./metricsPage.scss";
@@ -14,6 +14,7 @@ import "./metricsPage.scss";
 const GET_ARTICLES = gql`
   query {
     articles {
+      gender
       title
     }
   }
@@ -39,12 +40,20 @@ const MetricsPage: React.FC = () => {
     icon: "",
     color: "#6886c5",
   });
+  const [quantity, changeQuantity] = useState({
+    male: 0,
+    female: 0,
+    other: 0,
+  });
 
   // GraphQL
   const { error, data } = useQuery(GET_ARTICLES);
 
   let postNumber = 0;
   let articleNumber = 0;
+  let articlePostMale = 0;
+  let articlePostFemale = 0;
+  let articlePostOther = 0;
 
   useEffect(() => {
     if (error) {
@@ -58,6 +67,9 @@ const MetricsPage: React.FC = () => {
       if (data.articles.length > 0) {
         for (let i = 0; i < data.articles.length; i++) {
           if (data.articles[i].title === "Post") postNumber++;
+          if (data.articles[i].gender === "Male") articlePostMale++;
+          if (data.articles[i].gender === "Female") articlePostFemale++;
+          if (data.articles[i].gender === "Other") articlePostOther++;
         }
 
         changePostCircle({
@@ -82,6 +94,12 @@ const MetricsPage: React.FC = () => {
           icon: "Article",
           color: "#6886c5",
         });
+
+        changeQuantity({
+          male: articlePostMale,
+          female: articlePostFemale,
+          other: articlePostOther,
+        });
       }
     }
   }, [data]);
@@ -93,7 +111,10 @@ const MetricsPage: React.FC = () => {
         <CirclePost post={postCircle} />
         <CirclePost post={totalCircle} />
       </div>
-      <GenderChart />
+      <div className="lineDivide"></div>
+      <div className="genderChartContainer">
+        <GenderBarChart quantity={quantity} />
+      </div>
     </div>
   );
 };
