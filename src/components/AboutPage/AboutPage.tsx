@@ -15,6 +15,14 @@ const AboutPage: React.FC = () => {
     if (parallObject !== null) {
       parallObject.addEventListener("scroll", () => {
         setOffset(parallObject.scrollTop);
+
+        const parallObjectHTML = parallObject as HTMLElement;
+
+        if (parallObject.scrollTop < 200 || parallObject.scrollTop >= 2100) {
+          parallObjectHTML.style.background = "#071013";
+        } else {
+          parallObjectHTML.style.background = "";
+        }
       });
     }
   }, []);
