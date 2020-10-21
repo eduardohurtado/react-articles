@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 
 // Style
 import "./aboutPage.scss";
@@ -6,33 +6,23 @@ import "./aboutPage.scss";
 const AboutPage: React.FC = () => {
   const [offset, setOffset] = useState(0);
 
-  useEffect(() => {
-    function handleScroll() {
-      setOffset(window.pageYOffset);
-    }
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const style: CSSProperties = {
+    backgroundPositionY: `${offset * 0.5}px`,
+  };
 
   useEffect(() => {
-    if (offset) {
-      console.log(offset);
+    const parallObject = document.querySelector(".aboutPage");
+    if (parallObject !== null) {
+      parallObject.addEventListener("scroll", () => {
+        setOffset(parallObject.scrollTop);
+      });
     }
-  }, [offset]);
+  }, []);
 
   return (
     <div className="aboutPage">
-      <div>
-        <h2
-          className="parallax"
-          style={{
-            backgroundPositionY: `translateY(${offset * 0.5}px)`,
-          }}
-        >
-          DIV 1
-        </h2>
+      <div style={style}>
+        <h2>DIV 1</h2>
       </div>
       <div>
         <h2>DIV 2</h2>

@@ -79,7 +79,6 @@ const MetricsPage: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       if (data.articles.length > 0) {
         for (let i = 0; i < data.articles.length; i++) {
           if (data.articles[i].title === "Post") postNumber++;
