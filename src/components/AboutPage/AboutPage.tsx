@@ -92,10 +92,11 @@ const AboutPage: React.FC = () => {
         <p className="paragraph">
           This software was born as a personal practice to improve skills in
           React.Js and the Node.Js environment, fullstack web application (CRUD)
-          operational, also, this is a React-Router multi tab and mobile first
-          application, global state provided by Redux and production bundling
-          practice powered by Webpack4, all this working with a business GraphQL
-          API layer conected to a MongoDB database.
+          operational and <b>real time response</b>, also, this is a
+          React-Router multi tab and mobile first application, global state
+          provided by Redux and production bundling practice powered by
+          Webpack4, all this working with a business GraphQL API layer conected
+          to a MongoDB database.
         </p>
 
         <p className="paragraph">

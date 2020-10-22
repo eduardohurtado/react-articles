@@ -1,6 +1,6 @@
 # REACT ARTICLES
 
-This software was born as a personal practice to improve skills in React.Js and the Node.Js environment, fullstack web application (CRUD) operational, also, this is a React-Router multi tab and mobile first application, global state provided by Redux and production bundling practice powered by Webpack4, all this working with a business GraphQL API layer conected to a MongoDB database.
+This software was born as a personal practice to improve skills in React.Js and the Node.Js environment, fullstack web application (CRUD) operational and `REAL TIME RESPONSE`, also, this is a React-Router multi tab and mobile first application, global state provided by Redux and production bundling practice powered by Webpack4, all this working with a business GraphQL API layer conected to a MongoDB database.
 
 ![React Articles](https://www.mysupplychaingroup.com/wp-content/uploads/2016/03/articles-banner.jpg)
 
