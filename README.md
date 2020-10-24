@@ -8,7 +8,7 @@ This application was made following the three-tier layer architecture, enabling 
 
 ## App requirements
 
-You need to have installed [Node Js](https://nodejs.org/en/) on your system to run the local online server.
+You need to have installed [Node Js](https://nodejs.org/en/) on your system to run the local online server, please note that this project has submodules, so, in order to set up the environment after cloning the project inmediatly run `git submodule update --init --force --remote` to download the final version of submodules, and then you are good to go.
 
 ## Install the project
 
